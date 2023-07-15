@@ -20,12 +20,13 @@ const client = new Client({
   ],
 });
 const fs = require('fs');
+client.setMaxListeners(50)
 
 const errorLogStream = fs.createWriteStream(path.join(__dirname, 'error.log'), { flags: 'a' });
 const originalStderrWrite = process.stderr.write;
 process.stderr.write = function (error) {
   const timestamp = new Date().toISOString();
-  const logEntry = `[${timestamp}] Error: ${error}`;
+  const logEntry = `\n\n\n\n[${timestamp}] Error: ${error}`;
   errorLogStream.write(logEntry);
   originalStderrWrite.call(process.stderr, logEntry);
 };
@@ -141,17 +142,6 @@ client.on('messageCreate', newMessage => {
     }
   } catch (error) {}
 });
-
-/*client.on('messageCreate', message => {
-    try{
-  if(message.channel.id === '1111996572394340362' && message.embeds[0].title.startsWith("RAID: Ends")){
-       client.channels.cache.get('1108439657391325294').send("> **<@&1112934336870748251>, new monster is waiting for you!**\nRaid right now using \`sgr\`");
-      client.channels.cache.get('1113809189916135434').send("**<@&1113810458349142028>, new monster is waiting for you!**\nRaid right now using \`sgr\`");
-      
-client.channels.cache.get('926806326900842548').send("**<@&1112004881725788210>, new monster is waiting for you!**\nRaid right now using \`sgr\`");
-     
-  }} catch(err) { console.error(err); }
-})*/
 
 client.on('messageCreate', message => {
   if (
