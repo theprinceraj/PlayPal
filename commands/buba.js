@@ -20,6 +20,7 @@ exports.run = (client, message, args) =>  {
     } catch(e) {
         console.error(`Error encountered in buba.js:\n${e}`);
     }
+    message.reply({embeds: [embed]});
 }
 
 exports.name = "buba";
