@@ -4,28 +4,21 @@ const { AttachmentBuilder } = require('discord.js')
 
 exports.run = async (client, message, args) => {
     try {
-        const member = message.mentions.members.first();
-        if (!member) return;
+        const member = message.mentions.members.first() || message.author;
         GlobalFonts.registerFromPath(join(__dirname, 'instagramFont.ttf'), 'igFont');
 
-        const image = await loadImage(join(__dirname, 'instagramFakeBaseImage.jpg'))
+        const image = await loadImage(join(__dirname, 'groupPhotoBaseImage.jpg'))
         const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0);
 
-        ctx.fillStyle = '#000000'
-        ctx.lineWidth = 5
-        ctx.font = '36px igFont'
-        const username = member.user.tag
-        ctx.fillText(username, 40, 294);
-
         const avatar = await loadImage(member.displayAvatarURL())
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath()
-        ctx.arc(151, 145, 100, 0, Math.PI * 2, true)
+        ctx.arc(620, 356, 95, 0, Math.PI * 2, true)
         ctx.closePath()
         ctx.clip()
-        ctx.drawImage(avatar, 54, 43.6, 202, 202);
+        ctx.drawImage(avatar, 517, 255, 205, 205);
 
         const jpgFile = await canvas.encode('jpeg');
         const attachment = new AttachmentBuilder(jpgFile, 'modified_image.jpg')
@@ -42,5 +35,5 @@ exports.run = async (client, message, args) => {
 
 }
 
-exports.name = 'instagramFake'
-exports.aliases = ['ig', 'igfake']
+exports.name = 'groupPhoto'
+exports.aliases = ['gp']

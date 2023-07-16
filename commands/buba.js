@@ -3,6 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 exports.run = (client, message, args) => {
     try {
         const user = message.mentions.users.first() || message.author;
+        if (!user) return;
         const bubaComments = [
             "${user} has so small booba that its not even visible through microscope.",
             "${user} is a no booba person.",

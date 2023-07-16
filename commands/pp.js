@@ -1,5 +1,6 @@
 exports.run = (client, message, args) => {
   const user = message.mentions.users.first() || message.author;
+  if (!user) return;
   const ppResponse = [
     "${user}'s PP size: 8==D",
     "${user}'s PP size: 8=D",

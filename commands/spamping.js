@@ -1,4 +1,5 @@
 exports.run = (client, message, args) => {
+  if (!member) return;
   if (message.author.id === '564327207133249536') {
     const user = message.mentions.users.first();
     if (!user) return;
