@@ -1,12 +1,9 @@
 const {
   Client,
   IntentsBitField,
-  EmbedBuilder,
   Collection,
-  Intents,
   ActivityType,
   GatewayIntentBits,
-  Events,
 } = require('discord.js');
 const path = require('node:path');
 const config = require('./config.json');
@@ -20,7 +17,6 @@ const client = new Client({
   ],
 });
 const fs = require('fs');
-client.setMaxListeners(50)
 
 const errorLogStream = fs.createWriteStream(path.join(__dirname, 'error.log'), { flags: 'a' });
 const originalStderrWrite = process.stderr.write;
@@ -38,76 +34,27 @@ client.on('ready', () => {
 
 client.config = config;
 
-client.slashcommands = new Collection();
-const foldersPath = path.join(__dirname, 'slashcommands');
-const commandFolders = fs.readdirSync(foldersPath).filter(folder => folder.startsWith('folder'));
-
-for (const folder of commandFolders) {
-  const commandsPath = path.join(foldersPath, folder);
-  const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-  for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    if ('data' in command && 'execute' in command) {
-      client.slashcommands.set(command.data.name, command);
-    } else {
-      console.log(`The command at ${filePath} is missing a required 'data' or 'execute' property.`);
-    }
-  }
+const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+for (const file of events) {
+  const eventName = file.split('.')[0];
+  const event = require(`./events/${file}`);
+  client.on(eventName, event.bind(null, client));
 }
 
-try {
-  const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-  for (const file of events) {
-    const eventName = file.split('.')[0];
-    const event = require(`./events/${file}`);
-    client.on(eventName, event.bind(null, client));
+client.commands = new Collection();
+const commands = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commands) {
+  const commandName = file.split('.')[0];
+  const command = require(`./commands/${file}`);
+  if (command.aliases) {
+    command.aliases.forEach(alias => {
+      client.commands.set(alias, command);
+    });
+    console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
   }
-
-  client.commands = new Collection();
-  const commands = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-  for (const file of commands) {
-    const commandName = file.split('.')[0];
-    const command = require(`./commands/${file}`);
-    if (command.aliases) {
-      command.aliases.forEach(alias => {
-        client.commands.set(alias, command);
-      });
-      console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
-    }
-    client.commands.set(commandName, command);
-    if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
-  }
-} catch (error) {
-  console.log(error);
+  client.commands.set(commandName, command);
+  if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
 }
-
-client.on(Events.InteractionCreate, async interaction => {
-  if (!interaction.isChatInputCommand()) return;
-  const command = client.slashcommands.get(interaction.commandName);
-  if (!command) {
-    console.log(`No commands matching ${interaction.commandName} was found.`);
-  }
-
-  try {
-    if (interaction.deferred || interaction.replied) {
-      return await interaction.followUp({
-        content: 'There was an error while executing the command.(followUp)',
-        ephemeral: true,
-      });
-    }
-
-    return await command.execute(client, interaction);
-  } catch (e) {
-    console.error(e);
-    await interaction
-      .reply({
-        content: 'There was an error while executing the command.(reply)',
-        ephemeral: true,
-      })
-      .catch(() => null);
-  }
-});
 
 client.on('messageCreate', newMessage => {
   const fs = require('fs');
@@ -140,7 +87,7 @@ client.on('messageCreate', newMessage => {
         })
         .catch(error => `Failed to create thread for ${newMessage.url}`);
     }
-  } catch (error) {}
+  } catch (error) { }
 });
 
 client.login(config.token);
