@@ -143,16 +143,4 @@ client.on('messageCreate', newMessage => {
   } catch (error) {}
 });
 
-client.on('messageCreate', message => {
-  if (
-    (message.author.bot && message.content.includes('before using the command.')) ||
-    message.content.includes('is blacklisted in this channel.')
-  ){
-    try{
-      message.delete();
-    } catch(error){
-      console.log(error);
-    }
-  }
-});
 client.login(config.token);
