@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
   try {
     const member = message.mentions.members.first();
     if (!member) return;
-    const img = await loadImage(join(__dirname, "spankTemplate.jpg")).catch(
+    const img = await loadImage(join(__dirname, "spankFakeProps.jpg")).catch(
       (err1) => {
         console.error(`error loading the image`);
         return;

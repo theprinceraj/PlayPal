@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
         if (!member) return;
         GlobalFonts.registerFromPath(join(__dirname, 'instagramFont.ttf'), 'igFont');
 
-        const image = await loadImage(join(__dirname, 'instagramFakeBaseImage.jpg'))
+        const image = await loadImage(join(__dirname, 'instagramFakeProps.jpg'))
         const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0);

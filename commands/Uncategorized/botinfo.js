@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const config = require("../config.json");
+const config = require("../../config.json");
 
 const online_emoji = "<a:online:1115694948306661457>";
 const ping_emoji = "<a:ping:1115687484706271394>";

@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
         const member = message.mentions.members.first() || message.author;
         GlobalFonts.registerFromPath(join(__dirname, 'instagramFont.ttf'), 'igFont');
 
-        const image = await loadImage(join(__dirname, 'groupPhotoBaseImage.jpg'))
+        const image = await loadImage(join(__dirname, 'groupPhotoProps.jpg'))
         const canvas = createCanvas(image.width, image.height);
         const ctx = canvas.getContext('2d')
         ctx.drawImage(image, 0, 0);

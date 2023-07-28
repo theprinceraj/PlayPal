@@ -25,7 +25,7 @@ exports.run = async (client, message, args0) => {
     else args.splice(0, 1);
     const sentence = args.join(' ')
     if (sentence.length < 55) {
-      const image = await loadImage(join(__dirname, 'imageChat.jpg'))
+      const image = await loadImage(join(__dirname, 'fakeSayProps.jpg'))
         .catch(err1 => {
           console.error(`error loading the image`)
           return;
@@ -69,4 +69,5 @@ exports.run = async (client, message, args0) => {
   }
 }
 
-exports.name = 'fakesay'
+exports.name = 'fakeSay'
+exports.aliases = ['fs']
