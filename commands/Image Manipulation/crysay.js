@@ -11,7 +11,7 @@ exports.run = async (client, message, args) => {
         GlobalFonts.registerFromPath(join(__dirname,'gg sans Regular.ttf'),'gg_sans');
         const sentence = args.join(' ');
         if(sentence.length !== 0) {
-            const baseImage = await loadImage(join(__dirname,'crySayBaseImage.png')).catch(err1 => {
+            const baseImage = await loadImage(join(__dirname,'crySayProps.png')).catch(err1 => {
                 console.error('Error while loading the image.');
                 return;
             });
