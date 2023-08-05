@@ -23,7 +23,7 @@ exports.run = (client, message, args) => {
     .setThumbnail(client.user.displayAvatarURL())
     .setColor(Math.floor(Math.random() * 16777216))
     .setFooter({ text: message.guild.name, iconURL: message.guild.iconURL() })
-  message.reply({ embeds: [embed] }).catch(err => console.error(err))
+  message.reply({ embeds: [embed] }).catch(err => console.log(err));
 };
 
 exports.name = "help";
