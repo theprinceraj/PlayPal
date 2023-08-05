@@ -167,4 +167,11 @@ client.on('messageCreate', newMessage => {
 
 // });
 
+
+
+// Listen for messageCreate event
+
+// Define the prefix for commands
+
+
 client.login(config.token);
