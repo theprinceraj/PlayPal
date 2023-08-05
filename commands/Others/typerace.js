@@ -20,7 +20,7 @@ exports.run = async (client, message, args) => {
       .setDescription(`Who can type **__${word}__** before everyone else?`)
       .setColor(Math.floor(Math.random() * 16777215));
 
-    gameMessage = await message.reply({ embeds: [embed] });
+    gameMessage = await message.reply({ embeds: [embed] }).catch(error => console.error(error));
     gameChannel = message.channel;
 
     gameStatus = true;

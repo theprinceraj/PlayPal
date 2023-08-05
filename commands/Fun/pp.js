@@ -21,7 +21,7 @@ exports.run = (client, message, args) => {
   ];
 
   message.reply(ppResponse[Math.floor(Math.random() * ppResponse.length)].replace('${user}', user),
-  );
+  ).catch(error => console.error(error));
 };
 
 exports.name = 'pp';

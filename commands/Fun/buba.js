@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
             .setDescription(`${response}`)
             .setTimestamp()
             .setFooter({ text: message.guild.name, iconURL: message.guild.iconURL() })
-        message.reply({ embeds: [embed] });
+        message.reply({ embeds: [embed] }).catch(error => console.error(error))
     } catch (e) {
         console.error(`Error encountered in buba.js:\n${e}`);
     }

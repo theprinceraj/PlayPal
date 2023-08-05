@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
 	embed.setTitle("Dice Roll Result")
   	embed.setDescription(`${message.author.username} rolled **__${roll}__**`);
      
-     message.reply({embeds: [embed]});
+     message.reply({embeds: [embed]}).catch(error => console.error(error));
 }
 
 exports.name = "roll"

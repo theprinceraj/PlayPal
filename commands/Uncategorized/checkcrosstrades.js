@@ -46,7 +46,7 @@ exports.run = (client,message,args0) => {
           return;
         }
         const att = new AttachmentBuilder('./filtered_crosstrades.txt','filtered_crosstrades.txt')
-        message.reply({content:`Filtered crosstrades saved successfully.`,files:[att]});
+        message.reply({content:`Filtered crosstrades saved successfully.`,files:[att]}).catch(error => console.error(error));
       });
     });
 

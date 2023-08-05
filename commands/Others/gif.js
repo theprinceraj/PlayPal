@@ -7,7 +7,7 @@ exports.run = async (client, message, args) => {
     const query = args.join(" ");
     let received = await fetch(`https://tenor.googleapis.com/v2/search?q=${query}&key=${TENOR_API_KEY}&limit=1&contentfilter=high&random=true`);
      const json = await received.json();
-     const sentMessage = await message.reply(json.results[0].url);
+     const sentMessage = await message.reply(json.results[0].url).catch(error => console.error(error));
     
 /* const embed = new EmbedBuilder()
     .setTitle("There you go!")

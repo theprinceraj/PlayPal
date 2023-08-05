@@ -1919,7 +1919,7 @@ exports.run = (client, message, args) => {
     else { reply = "Invalid Frame Code!"; }
     embed.setDescription(`${reply}`);
     embed.setTitle("Legacy Frames Checker for Sofi");
-    message.reply({ embeds: [embed] });
+    message.reply({ embeds: [embed] }).catch(error => console.error(error));
 }
 
 

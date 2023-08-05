@@ -43,7 +43,7 @@ exports.run = (client, message, args) => {
     .setDescription(`${online_emoji} I am serving \`${client.guilds.cache.size}\` servers with prefix \`${prefix}\`! ❤️🚀\n${crown_emoji} **Developer**: ${message.author.tag}\n${ping_emoji} **Ping**: \`${ping}ms\`\n${uptime_emoji} **Uptime**: \`${uptime}\`\n${memory_emoji} **Memory Usage**: \`${usedMemory}\`\n${servers_emoji} **Server List**: ||${serverNamesWithSpace}||`)
     .setTimestamp();
     
-    message.reply({embeds: [embed]});
+    message.reply({embeds: [embed]}).catch(error => console.error(error));
     
 }
 
