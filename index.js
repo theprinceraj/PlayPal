@@ -36,31 +36,35 @@ client.on('ready', () => {
 client.config = config;
 
 
-const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-for (const file of events) {
-	const eventName = file.split('.')[0];
-	const event = require(`./events/${file}`);
-	client.on(eventName, event.bind(null, client));
-}
-
-client.commands = new Collection();
-
-const commandsFolder = fs.readdirSync(`./commands`);
-for (const folder of commandsFolder) {
-	const commands = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	console.log(`***********>>>>>${folder}<<<<<***********`);
-	for (const file of commands) {
-		const commandName = file.split('.')[0];
-		const command = require(`./commands/${folder}/${file}`);
-		if (command.aliases) {
-			command.aliases.forEach(alias => {
-				client.commands.set(alias, command);
-			});
-			console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
-		}
-		client.commands.set(commandName, command);
-		if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
+try {
+	const events = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+	for (const file of events) {
+		const eventName = file.split('.')[0];
+		const event = require(`./events/${file}`);
+		client.on(eventName, event.bind(null, client));
 	}
+
+	client.commands = new Collection();
+
+	const commandsFolder = fs.readdirSync(`./commands`);
+	for (const folder of commandsFolder) {
+		const commands = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+		console.log(`***********>>>>>${folder}<<<<<***********`);
+		for (const file of commands) {
+			const commandName = file.split('.')[0];
+			const command = require(`./commands/${folder}/${file}`);
+			if (command.aliases) {
+				command.aliases.forEach(alias => {
+					client.commands.set(alias, command);
+				});
+				console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
+			}
+			client.commands.set(commandName, command);
+			if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
+		}
+	}
+} catch (error) {
+	console.log(error)
 }
 
 client.on('messageCreate', newMessage => {
