@@ -73,26 +73,28 @@ client.on('messageCreate', newMessage => {
 	const minutes = today.getUTCMinutes();
 	const seconds = today.getUTCSeconds();
 	const time = `${hours}:${minutes}:${seconds} ${date}/${month}/${year} `;
-	if (
-		newMessage.author.bot &&
-		newMessage.embeds[0].description.includes('sent a trade request') &&
-		newMessage.channel.id === '950783355614539778'
-	) {
-		const thread = newMessage
-			.startThread({
-				name: `Send Crosstrade Proof:`,
-				autoArchiveDuration: 24 * 60,
-			})
-			.then(thread => {
-				thread.send('Please attach a screenshot proof to the above crosstrade here. It is a compulsory rule.');
-				fs.appendFile('./storeroom/crosstrades.txt', `\n${time} ==> ${newMessage.url}`, error => {
-					if (error) {
-						console.log(error);
-					}
-				});
-			})
-			.catch(error => `Failed to create thread for ${newMessage.url}`);
-	}
+	try {
+		if (
+			newMessage.author.bot &&
+			newMessage.embeds[0].description.includes('sent a trade request') &&
+			newMessage.channel.id === '950783355614539778'
+		) {
+			const thread = newMessage
+				.startThread({
+					name: `Send Crosstrade Proof:`,
+					autoArchiveDuration: 24 * 60,
+				})
+				.then(thread => {
+					thread.send('Please attach a screenshot proof to the above crosstrade here. It is a compulsory rule.');
+					fs.appendFile('./storeroom/crosstrades.txt', `\n${time} ==> ${newMessage.url}`, error => {
+						if (error) {
+							console.log(error);
+						}
+					});
+				})
+				.catch(error => `Failed to create thread for ${newMessage.url}`);
+		}
+	} catch (error) { }
 });
 
 // client.on('messageCreate', message => {
