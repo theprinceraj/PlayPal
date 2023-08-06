@@ -131,8 +131,8 @@ client.on('messageCreate', message => {
 		for (server in raiders[raider].serverIdRaidedIn) {
 			if (raiders[raider].serverIdRaidedIn[server] === message.guildId) {
 				continue;
-			} else 
-			raiders[raider].serverIdRaidedIn.push(message.guildId);
+			} else
+				raiders[raider].serverIdRaidedIn.push(message.guildId);
 		}
 
 		raiders[raider].raidsDone += 1;
@@ -166,7 +166,10 @@ client.on('messageCreate', message => {
 				return;
 			}
 
-			if (raiders[raider].xpGained === 0) console.log(message.embeds[0]);
+			if (raiders[raider].xpGained === 0) {
+				console.log(message.embeds[0]);
+				raiders[raider].bugged = true;
+			}
 		});
 
 	});
