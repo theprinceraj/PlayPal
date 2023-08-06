@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
     "${user}, you’re a conversation starter. Not when you are around, but once you leave.",
     "${user}, I ain't saying that you're the dumbest person in the world, but you'd better hope they don't die."
   ];
-  message.reply(insults[Math.floor(Math.random() * insults.length)].replace("${user}", user)).catch(error => console.error(error));
+  message.reply(insults[Math.floor(Math.random() * insults.length)].replaceAll("${user}", user)).catch(error => console.error(error));
 }
 
 exports.name = "insult";

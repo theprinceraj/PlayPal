@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
     'Attention, people! ${user} got the longest PP ever recorded in history till date.',
   ];
 
-  message.reply(ppResponse[Math.floor(Math.random() * ppResponse.length)].replace('${user}', user),
+  message.reply(ppResponse[Math.floor(Math.random() * ppResponse.length)].replaceAll('${user}', user),
   ).catch(error => console.error(error));
 };
 
