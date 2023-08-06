@@ -29,7 +29,7 @@ exports.run = (client, message, args) => {
                 message.reply('No stat found, do a raid with `sgr` and then try again.').catch(err => console.log(err))
             }
             const embed = new EmbedBuilder()
-                .setTitle(`PlayPal's Guild Stats for ${raiderSearched.username}`)
+                .setTitle(`PlayPal's Guild Stats for \`${raiderSearched.username}\``)
                 .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\`\n<:mathsymbol:1137801859772461116> Average XP: \`${Math.round(raiders[raiderSearched.id].xpGained / raiders[raiderSearched.id].raidsDone)}\``)
                 .setFooter({text:"Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg'})
                 .setTimestamp()
