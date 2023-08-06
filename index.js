@@ -104,9 +104,9 @@ client.on('messageCreate', message => {
 	if (!descriptionVar || descriptionVar?.includes('Difficulty') === false || descriptionVar?.includes('Reroll Scrolls')) return;
 
 	const xpRegex = /\+\d+/;
-	const match = descriptionVar.match(xpRegex);
-	if (!match) return;
-	const xpGained = parseInt(match[0].slice(1));
+	const matchXp = descriptionVar.match(xpRegex);
+	if (!matchXp) return;
+	const xpGained = parseInt(matchXp[0].slice(1));
 
 	fs.readFile('./storeroom/raiders.json', 'utf8', (err, data) => {
 		if (err) {
