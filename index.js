@@ -123,8 +123,12 @@ client.on('messageCreate', message => {
 				"raidsDone": 0,
 				"elixirGained": 0,
 				xpGained: 0,
+				highestXpGained: 0,
 				serverIdRaidedIn: [message.guildId],
 			}
+
+			raiders[raider].highestXpGained = xpGained;
+
 			console.log('NEW raider was added!');
 		}
 
