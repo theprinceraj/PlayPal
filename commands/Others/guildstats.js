@@ -30,7 +30,9 @@ exports.run = (client, message, args) => {
             }
             const embed = new EmbedBuilder()
                 .setTitle(`PlayPal's Guild Stats for ${raiderSearched.username}`)
-                .setDescription(`Raids Done: ${raiders[raiderSearched.id].raidsDone}\nXP Gained:${raiders[raiderSearched.id].xpGained}\nElixir Gained: ${raiders[raiderSearched.id].elixirGained}`)
+                .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\``)
+                .setFooter({text:"Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg'})
+                .setTimestamp()
 
             message.reply({ embeds: [embed] }).catch(err => console.log(err))
         } catch (error) { }
