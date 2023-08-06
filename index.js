@@ -101,7 +101,7 @@ client.on('messageCreate', message => {
 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
-	if (!descriptionVar && !descriptionVar?.includes('__**Conditionals**__')) return;
+	if (!descriptionVar && !descriptionVar?.includes('Difficulty') || descriptionVar?.includes('Reroll Scrolls')) return;
 
 	const xpRegex = /\+\d+/;
 	const match = descriptionVar.match(xpRegex);

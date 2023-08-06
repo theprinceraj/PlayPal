@@ -1,34 +1,66 @@
 {
-  "564327207133249536": {
+  "744129563449229324": {
     "raidsDone": 2,
-    "elixirGained": 340,
-    "xpGained": 15188,
+    "elixirGained": 0,
+    "xpGained": 0,
     "serverIdRaidedIn": [
-      "1095415742817648670"
+      "948474258831589377"
     ]
   },
-  "795164954356482098": {
-    "raidsDone": 1,
-    "elixirGained": 20,
-    "xpGained": 700,
+  "768841414242205737": {
+    "raidsDone": 5,
+    "elixirGained": 170,
+    "xpGained": 10350,
     "serverIdRaidedIn": [
-      "892831336149172305"
+      "948474258831589377"
     ]
   },
   "935400167736217712": {
     "raidsDone": 1,
     "elixirGained": 170,
-    "xpGained": 9400,
+    "xpGained": 9800,
     "serverIdRaidedIn": [
       "892831336149172305"
     ]
   },
-  "763338188906823700": {
+  "747055393103937626": {
     "raidsDone": 1,
-    "elixirGained": 80,
-    "xpGained": 5449,
+    "elixirGained": 0,
+    "xpGained": 0,
+    "serverIdRaidedIn": [
+      "948474258831589377"
+    ]
+  },
+  "808172317196288041": {
+    "raidsDone": 1,
+    "elixirGained": 0,
+    "xpGained": 0,
     "serverIdRaidedIn": [
       "892831336149172305"
+    ]
+  },
+  "944905747744059432": {
+    "raidsDone": 1,
+    "elixirGained": 170,
+    "xpGained": 11150,
+    "serverIdRaidedIn": [
+      "948474258831589377"
+    ]
+  },
+  "904362097490677760": {
+    "raidsDone": 1,
+    "elixirGained": 0,
+    "xpGained": 0,
+    "serverIdRaidedIn": [
+      "948474258831589377"
+    ]
+  },
+  "1018821201482756147": {
+    "raidsDone": 2,
+    "elixirGained": 0,
+    "xpGained": 0,
+    "serverIdRaidedIn": [
+      "948474258831589377"
     ]
   }
 }
