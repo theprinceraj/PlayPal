@@ -97,81 +97,81 @@ client.on('messageCreate', newMessage => {
 	} catch (error) { }
 });
 
-// client.on('messageCreate', message => {
-// 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
-// 	const descriptionVar = message.embeds[0]?.description;
+client.on('messageCreate', message => {
+	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
+	const descriptionVar = message.embeds[0]?.description;
 
-// 	if(descriptionVar && !descriptionVar.includes('__**Conditionals**__')) return;
+	if (!descriptionVar && !descriptionVar?.includes('__**Conditionals**__')) return;
 
-// 	const xpRegex = /\+\d+/;
-// 	const match = descriptionVar.match(xpRegex);
-// 	if(!match) return;
-// 	console.log(match.slice(1));
-// 	fs.readFile('./storeroom/raiders.json', 'utf8', (err, data) => {
-// 		if (err) {
-// 			console.error('Error reading raiders.json', err);
-// 			return;
-// 		}
+	const xpRegex = /\+\d+/;
+	const match = descriptionVar.match(xpRegex);
+	if (!match) return;
+	const xpGained = parseInt(match[0].slice(1));
 
-// 		const raiders = JSON.parse(data);
+	fs.readFile('./storeroom/raiders.json', 'utf8', (err, data) => {
+		if (err) {
+			console.error('Error reading raiders.json', err);
+			return;
+		}
 
-// 		const raider = message.mentions.members.first().id;
+		const raiders = JSON.parse(data);
 
-// 		console.log(raider);
+		const raider = message?.mentions?.users.first()?.id || descriptionVar.match(/<@(\d+)>/)[1];
 
-// 		if (!raiders.hasOwnProperty(raider)) {
-// 			raiders[raider] = {
-// 				"raidsDone": 0,
-// 				"elixirGained": 0,
-// 				xpGained: 0,
-// 			}
-// 		}
+		if (!raiders.hasOwnProperty(raider)) {
+			raiders[raider] = {
+				"raidsDone": 0,
+				"elixirGained": 0,
+				xpGained: 0,
+				serverIdRaidedIn: [message.guildId],
+			}
+			console.log('NEW raider was added!');
+		}
 
-// 		raiders[raider].raidsDone += 1;
+		for (server in raiders[raider].serverIdRaidedIn) {
+			if (raiders[raider].serverIdRaidedIn[server] === message.guildId) {
+				continue;
+			} else 
+			raiders[raider].serverIdRaidedIn.push(message.guildId);
+		}
 
-// 		if (descriptionVar.includes('Great job defeating the monster')) {
-// 			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
-// 				raiders[raider].elixirGained += 60;
-// 				raiders[raider].xpGained += 9000;
-// 			}
-// 			else if (descriptionVar.includes('\nDifficulty: **Medium**')) {
-// 				raiders[raider].elixirGained += 90;
-// 				raiders[raider].xpGained += 18000;
-// 			}
-// 			else if (descriptionVar.includes('\nDifficulty: **Hard**')) {
-// 				raiders[raider].elixirGained += 150;
-// 				raiders[raider].xpGained += 27000;
-// 			}
-// 		}
-// 		else if (descriptionVar.includes('Better luck next time')) {
-// 			raiders[raider].xpGained = 1000;
-// 			raiders[raider].elixirGained = 20;
-// 		}
+		raiders[raider].raidsDone += 1;
 
-// 		// Convert the updated JavaScript object back to a JSON string
-// 		const updatedData = JSON.stringify(raiders, null, 2);
+		if (descriptionVar.includes('Great job defeating the monster')) {
+			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
+				raiders[raider].elixirGained += 80;
+				raiders[raider].xpGained += xpGained;
+			}
+			else if (descriptionVar.includes('\nDifficulty: **Medium**')) {
+				raiders[raider].elixirGained += 110;
+				raiders[raider].xpGained += xpGained;
+			}
+			else if (descriptionVar.includes('\nDifficulty: **Hard**')) {
+				raiders[raider].elixirGained += 170;
+				raiders[raider].xpGained += xpGained;
+			}
+		}
+		else if (descriptionVar.includes('Better luck next time')) {
+			raiders[raider].elixirGained = 20;
+			raiders[raider].xpGained = xpGained;
+		}
 
-// 		// Write the JSON string back to the raiders.json file
-// 		fs.writeFile('./storeroom/raiders.json', updatedData, 'utf8', (err) => {
-// 			if (err) {
-// 				console.error('Error writing to raiders.json:', err);
-// 				return;
-// 			}
+		// Convert the updated JavaScript object back to a JSON string
+		const updatedData = JSON.stringify(raiders, null, 2);
 
-// 			console.log('New raider entry added successfully!');
+		// Write the JSON string back to the raiders.json file
+		fs.writeFile('./storeroom/raiders.json', updatedData, 'utf8', (err) => {
+			if (err) {
+				console.error('Error writing to raiders.json:', err);
+				return;
+			}
 
-// 		});
+			if (raiders[raider].xpGained === 0) console.log(message.embeds[0]);
+		});
 
-// 	});
-
-
-// });
+	});
 
 
-
-// Listen for messageCreate event
-
-// Define the prefix for commands
-
+});
 
 client.login(config.token);
