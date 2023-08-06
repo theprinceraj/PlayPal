@@ -1,7 +1,26 @@
 {
   "564327207133249536": {
     "raidsDone": 2,
-    "elixirGained": 180,
-    "xpGained": 36000
+    "elixirGained": 340,
+    "xpGained": 98594,
+    "serverIdRaidedIn": [
+      "892831336149172305"
+    ]
+  },
+  "795164954356482098": {
+    "raidsDone": 1,
+    "elixirGained": 170,
+    "xpGained": 6100,
+    "serverIdRaidedIn": [
+      "892831336149172305"
+    ]
+  },
+  "654165653795766295": {
+    "raidsDone": 1,
+    "elixirGained": 80,
+    "xpGained": 6440,
+    "serverIdRaidedIn": [
+      "1029445930782576712"
+    ]
   }
 }
