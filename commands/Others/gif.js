@@ -9,11 +9,11 @@ exports.run = async (client, message, args) => {
         const json = await received.json();
         const sentMessage = await message.reply(json.results[0].url).catch(error => console.error(error));
 
-        const embed = new EmbedBuilder()
-            .setTitle("There you go!")
-            .setDescription('The result is attached below.')
-            .setImage(`${json.results[0].url}`)
-        message.reply({ embeds: [embed] }).catch(err => console.log(err))
+        // const embed = new EmbedBuilder()
+        //     .setTitle("There you go!")
+        //     .setDescription('The result is attached below.')
+        //     .setImage(`${json.results[0].url}`)
+        // message.reply({ embeds: [embed] }).catch(err => console.log(err))
     } catch (error) {
         console.log(error);
     }
