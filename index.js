@@ -140,7 +140,9 @@ client.on('messageCreate', message => {
 		}
 
 		raiders[raider].raidsDone += 1;
-
+		if(raiders[raider].highestXpGained < xpGained)
+			raiders[raider].highestXpGained = xpGained;
+		
 		if (descriptionVar.includes('Great job defeating the monster')) {
 			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
 				raiders[raider].elixirGained += 80;
