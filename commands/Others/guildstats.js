@@ -26,7 +26,7 @@ exports.run = (client, message, args) => {
 
 
             if (!raiders.hasOwnProperty(raiderSearched.id)) {
-                message.reply('No stat found, do a raid with `sgr` and then try again.')
+                message.reply('No stat found, do a raid with `sgr` and then try again.').catch(err => console.log(err))
             }
             const embed = new EmbedBuilder()
                 .setTitle(`PlayPal's Guild Stats for ${raiderSearched.username}`)
