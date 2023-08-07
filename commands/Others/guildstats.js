@@ -30,7 +30,7 @@ exports.run = (client, message, args) => {
             }
             const embed = new EmbedBuilder()
                 .setTitle(`PlayPal's Guild Stats for \`${raiderSearched.username}\``)
-                .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\`\n<:mathsymbol:1137801859772461116> Average XP: \`${Math.round(raiders[raiderSearched.id].xpGained / raiders[raiderSearched.id].raidsDone)}\`\n<:up_green_arrow:1137958080580157471> Higest XP: \`${raiders[raiderSearched.id].highestXpGained}\``)
+                .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\`\n<:mathsymbol:1137801859772461116> Average XP: \`${Math.round(raiders[raiderSearched.id].xpGained / raiders[raiderSearched.id].raidsDone)}\`\n<:up_green_arrow:1137958080580157471> Highest XP: \`${raiders[raiderSearched.id].highestXpGained}\``)
                 .setFooter({text:"Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg'})
                 .setTimestamp()
 
