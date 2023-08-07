@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const { logError } = require('./errorLogger');
 
 exports.run = (client, message, args) => {
     try {
@@ -18,9 +19,9 @@ exports.run = (client, message, args) => {
             .setDescription(`${response}`)
             .setTimestamp()
             .setFooter({ text: message.guild.name, iconURL: message.guild.iconURL() })
-        message.reply({ embeds: [embed] }).catch(error => console.error(error))
+        message.reply({ embeds: [embed] }).catch(error => logError(error))
     } catch (e) {
-        console.error(`Error encountered in buba.js:\n${e}`);
+        logError(e);
     }
 
 }
