@@ -19,9 +19,6 @@ const client = new Client({
 	],
 });
 
-const fs = require('fs');
-const path = require('path');
-
 
 client.on('ready', () => {
 	console.log(`${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
