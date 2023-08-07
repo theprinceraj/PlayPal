@@ -19,14 +19,9 @@ const client = new Client({
 	],
 });
 
-const errorLogStream = fs.createWriteStream(path.join(__dirname, 'error.log'), { flags: 'a' });
-const originalStderrWrite = process.stderr.write;
-process.stderr.write = function (error) {
-	const timestamp = new Date().toISOString();
-	const logEntry = `\n\n\n\n[${timestamp}] Error: ${error}`;
-	errorLogStream.write(logEntry);
-	originalStderrWrite.call(process.stderr, logEntry);
-};
+const fs = require('fs');
+const path = require('path');
+
 
 client.on('ready', () => {
 	console.log(`${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
