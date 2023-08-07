@@ -31,7 +31,7 @@ exports.run = (client, message, args) => {
             const embed = new EmbedBuilder()
                 .setTitle(`PlayPal's Guild Stats for \`${raiderSearched.username}\``)
                 .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\`\n<:mathsymbol:1137801859772461116> Average XP: \`${Math.round(raiders[raiderSearched.id].xpGained / raiders[raiderSearched.id].raidsDone)}\`\n<:up_green_arrow:1137958080580157471> Highest XP: \`${raiders[raiderSearched.id].highestXpGained}\`\n🕛 Last Raid Xp: \`${raiders[raiderSearched.id].lastRaidXpGained}\`\n\n😍 **__${message.author.username}__**, click [here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot) to invite me.`)
-                .setFooter({text:"Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg'})
+                .setFooter({ text: "Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg' })
                 .setTimestamp()
 
             message.reply({ embeds: [embed] }).catch(err => console.log(err))
