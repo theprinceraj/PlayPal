@@ -1,3 +1,4 @@
+const path = require('path');
 /**
  * Logs an error message to the error log file.
  * 

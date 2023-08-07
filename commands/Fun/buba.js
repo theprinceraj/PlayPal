@@ -1,5 +1,4 @@
 const { EmbedBuilder } = require('discord.js');
-const { logError } = require('../../logError.js');
 
 exports.run = (client, message, args) => {
     try {
@@ -21,7 +20,8 @@ exports.run = (client, message, args) => {
             .setFooter({ text: message.guild.name, iconURL: message.guild.iconURL() })
         message.reply({ embeds: [embed] }).catch(error => logError(error))
     } catch (e) {
-        logError(e);
+        console.log(e)
+        // logError(e);
     }
 
 }
