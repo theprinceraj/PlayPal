@@ -124,12 +124,13 @@ client.on('messageCreate', message => {
 				"elixirGained": 0,
 				xpGained: 0,
 				highestXpGained: 0,
+				lastRaidXpGained: 0,
 				serverIdRaidedIn: [message.guildId],
 			}
 
 			raiders[raider].highestXpGained = xpGained;
 
-			console.log('NEW raider was added!');
+			console.log(`NEW raider(${raider}) was added!`);
 		}
 
 		for (server in raiders[raider].serverIdRaidedIn) {
@@ -140,9 +141,11 @@ client.on('messageCreate', message => {
 		}
 
 		raiders[raider].raidsDone += 1;
-		if(raiders[raider].highestXpGained < xpGained)
+		raiders[raider].lastRaidXpGained = xpGained;
+
+		if (raiders[raider].highestXpGained < xpGained)
 			raiders[raider].highestXpGained = xpGained;
-		
+
 		if (descriptionVar.includes('Great job defeating the monster')) {
 			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
 				raiders[raider].elixirGained += 80;
@@ -156,10 +159,12 @@ client.on('messageCreate', message => {
 				raiders[raider].elixirGained += 170;
 				raiders[raider].xpGained += xpGained;
 			}
+			console.log(`Raider(${raider}) was updated!`);
 		}
 		else if (descriptionVar.includes('Better luck next time')) {
 			raiders[raider].elixirGained = 20;
 			raiders[raider].xpGained = xpGained;
+			console.log(`Raider(${raider}) was updated!`);
 		}
 
 		// Convert the updated JavaScript object back to a JSON string
