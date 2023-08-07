@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { logError } = require('./errorLogger');
+const { logError } = require('../../logError.js');
 
 exports.run = (client, message, args) => {
     try {
