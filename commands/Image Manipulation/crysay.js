@@ -10,12 +10,14 @@ exports.run = async (client, message, args) => {
     try {
         GlobalFonts.registerFromPath(join(__dirname,'gg sans Regular.ttf'),'gg_sans');
         const sentence = args.join(' ');
+        if(sentence.length > 80)
+            return;
         if(sentence.length !== 0) {
             const baseImage = await loadImage(join(__dirname,'crySayProps.png')).catch(err1 => {
                 console.error('Error while loading the image.');
                 return;
             });
-           const canvas = await createCanvas(baseImage.width, baseImage.height); 
+           const canvas = createCanvas(baseImage.width, baseImage.height); 
             const ctx = canvas.getContext('2d');
             ctx.drawImage(baseImage, 0, 0); //draws base image
             ctx.fillStyle = '#ffffff';

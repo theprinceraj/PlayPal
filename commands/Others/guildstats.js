@@ -29,10 +29,17 @@ exports.run = (client, message, args) => {
                 message.reply('No stat found, do a raid with `sgr` and then try again.').catch(err => console.log(err))
             }
             const embed = new EmbedBuilder()
-                .setTitle(`PlayPal's Guild Stats for \`${raiderSearched.username}\``)
-                .setDescription(`⚔️ Raids Done: \`${raiders[raiderSearched.id].raidsDone}\`\n⌛ XP Gained: \`${raiders[raiderSearched.id].xpGained}\`\n💧 Elixir Gained: \`${raiders[raiderSearched.id].elixirGained}\`\n<:mathsymbol:1137801859772461116> Average XP: \`${Math.round(raiders[raiderSearched.id].xpGained / raiders[raiderSearched.id].raidsDone)}\`\n<:up_green_arrow:1137958080580157471> Highest XP: \`${raiders[raiderSearched.id].highestXpGained}\`\n🕛 Last Raid Xp: \`${raiders[raiderSearched.id].lastRaidXpGained}\`\n\n😍 **__${message.author.username}__**, click [here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot) to invite me.`)
-                .setFooter({ text: "Report 🐛 to @bhaalu, if any.", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg' })
+                .setColor('#6666ff')
+                .setTitle(`**Raider Stats for \`${raiderSearched.username}\`**`)
+                .setThumbnail(message.author.displayAvatarURL())
+                .addFields(
+                    { name: '⚔️ Raids', value: `Total: \`${raiders[raiderSearched.id].raids.total}\`\nWins: \`${raiders[raiderSearched.id].raids.won}\`\nLosses: \`${raiders[raiderSearched.id].raids.lost}\`` },
+                    { name: '<:elixir_icon:1138401766216577044> Elixirs', value: `Total: \`${raiders[raiderSearched.id].elixirGained}\`` },
+                    { name: '<:mathsymbol:1137801859772461116> XP', value: `Total: \`${raiders[raiderSearched.id].xp.total}\`\nHighest: \`${raiders[raiderSearched.id].xp.highest}\`\nLowest: \`${raiders[raiderSearched.id].xp.lowest}\`\nLast Raid: \`${raiders[raiderSearched.id].xp.lastRaid}\`\nAverage: \`${Math.round(raiders[raiderSearched.id].xp.total / raiders[raiderSearched.id].raids.total)}\`\nLast 5 Raids: \`${raiders[raiderSearched.id].xp.last5Raids.join(', ')}\`` },
+                    { name: '✨ Add Me', value: `[Click here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot)` }
+                )
                 .setTimestamp()
+                .setFooter({ text: "Report 🐛 to @bhaalu, if any", iconURL: 'https://i.ibb.co/44pnNp5/IMG-20230419-004628.jpg' })
 
             message.reply({ embeds: [embed] }).catch(err => console.log(err))
         } catch (error) { }

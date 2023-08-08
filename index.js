@@ -9,6 +9,7 @@ const {
 	ActivityType,
 	GatewayIntentBits,
 } = require('discord.js');
+const { time } = require('node:console');
 const client = new Client({
 	intents: [
 		IntentsBitField.Flags.Guilds,
@@ -21,7 +22,7 @@ const client = new Client({
 
 
 client.on('ready', () => {
-	console.log(`${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
+	console.log(`${convertTimestampToIST(Date.now())}: ${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
 	client.user.setPresence({ activities: [{ name: 'JavaScript', type: ActivityType.Competing }] });
 });
 
@@ -106,59 +107,63 @@ client.on('messageCreate', message => {
 			return;
 		}
 
-		const raiders = JSON.parse(data);
+		let raiders = JSON.parse(data);
 
 		const raider = message?.mentions?.users.first()?.id || descriptionVar.match(/<@(\d+)>/)[1];
 
 		if (!raiders.hasOwnProperty(raider)) {
 			raiders[raider] = {
-				"raidsDone": 0,
-				"elixirGained": 0,
-				xpGained: 0,
-				highestXpGained: 0,
-				lastRaidXpGained: 0,
-				serverIdRaidedIn: [message.guildId],
+				raids: {
+					total: 0,
+					won: 0,
+					lost: 0
+				},
+				elixirGained: 0,
+				xp: {
+					total: 0,
+					highest: 0,
+					lowest: 0,
+					lastRaid: 0,
+					last5Raids: ["None", "None", "None", "None", "None"]
+				}
 			}
 
-			raiders[raider].highestXpGained = xpGained;
-
-			console.log(`NEW raider(${raider}) was added!`);
+			raiders[raider].xp.highest = xpGained;
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) was added!`);
 		}
 
-		for (server in raiders[raider].serverIdRaidedIn) {
-			if (raiders[raider].serverIdRaidedIn[server] === message.guildId) {
-				continue;
-			} else
-				raiders[raider].serverIdRaidedIn.push(message.guildId);
-		}
+		raiders[raider].raids.total += 1;
+		raiders[raider].xp.total += xpGained;
+		raiders[raider].xp.lastRaid = xpGained;
+		
+		if (raiders[raider].xp.highest < xpGained)
+		raiders[raider].xp.highest = xpGained;
 
-		raiders[raider].raidsDone += 1;
-		raiders[raider].lastRaidXpGained = xpGained;
-
-		if (raiders[raider].highestXpGained < xpGained)
-			raiders[raider].highestXpGained = xpGained;
-
+		if (raiders[raider].xp.lowest > xpGained || raiders[raider].xp.lowest === 0)
+			raiders[raider].xp.lowest = xpGained;
+		
 		if (descriptionVar.includes('Great job defeating the monster')) {
+			raiders[raider].raids.won += 1;
 			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
+				raiders[raider].xp.last5Raids.push(`Easy Win(XP = ${xpGained})`);
 				raiders[raider].elixirGained += 80;
-				raiders[raider].xpGained += xpGained;
 			}
 			else if (descriptionVar.includes('\nDifficulty: **Medium**')) {
+				raiders[raider].xp.last5Raids.push(`Medium Win(XP = ${xpGained})`);
 				raiders[raider].elixirGained += 110;
-				raiders[raider].xpGained += xpGained;
 			}
 			else if (descriptionVar.includes('\nDifficulty: **Hard**')) {
+				raiders[raider].xp.last5Raids.push(`Hard Win(XP = ${xpGained})`);
 				raiders[raider].elixirGained += 170;
-				raiders[raider].xpGained += xpGained;
 			}
-			console.log(`Raider(${raider}) was updated!`);
 		}
 		else if (descriptionVar.includes('Better luck next time')) {
+			raiders[raider].xp.last5Raids.push(`Lost(XP = ${xpGained})`);
+			raiders[raider].raids.lost += 1;
 			raiders[raider].elixirGained = 20;
-			raiders[raider].xpGained = xpGained;
-			console.log(`Raider(${raider}) was updated!`);
 		}
-
+		raiders[raider].xp.last5Raids = raiders[raider].xp.last5Raids.slice(-5);
+		
 		// Convert the updated JavaScript object back to a JSON string
 		const updatedData = JSON.stringify(raiders, null, 2);
 
@@ -168,16 +173,28 @@ client.on('messageCreate', message => {
 				console.error('Error writing to raiders.json:', err);
 				return;
 			}
-
-			if (raiders[raider].xpGained === 0) {
-				console.log(message.embeds[0]);
-				raiders[raider].bugged = true;
-			}
+			// logs confirmation for data being updated
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) was updated!`);
 		});
 
 	});
 
-
 });
+
+function convertTimestampToIST(timestamp) {
+	const date = new Date(timestamp);
+	const options = {
+		timeZone: 'Asia/Kolkata',
+		hour12: false,
+		hour: 'numeric',
+		minute: 'numeric',
+		second: 'numeric',
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric'
+	};
+	const timeString = date.toLocaleTimeString('en-IN', options);
+	return `${timeString} IST`;
+}
 
 client.login(config.token);
