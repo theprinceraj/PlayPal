@@ -31,7 +31,7 @@ exports.run = (client, message, args) => {
             const embed = new EmbedBuilder()
                 .setColor('#6666ff')
                 .setTitle(`**Raider Stats for \`${raiderSearched.username}\`**`)
-                .setThumbnail(message.author.displayAvatarURL())
+                .setThumbnail(raiderSearched.displayAvatarURL())
                 .addFields(
                     { name: '⚔️ Raids', value: `Total: \`${raiders[raiderSearched.id].raids.total}\`\nWins: \`${raiders[raiderSearched.id].raids.won}\`\nLosses: \`${raiders[raiderSearched.id].raids.lost}\`` },
                     { name: '<:elixir_icon:1138401766216577044> Elixirs', value: `Total: \`${raiders[raiderSearched.id].elixirGained}\`` },
