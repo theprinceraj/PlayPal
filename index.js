@@ -198,4 +198,4 @@ function convertTimestampToIST(timestamp) {
 	return `${timeString} IST`;
 }
 
-client.login(config.testBotToken);
+client.login(config.token);
