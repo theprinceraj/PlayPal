@@ -91,6 +91,7 @@ client.on('messageCreate', newMessage => {
 });
 
 client.on('messageCreate', message => {
+	// console.log(message.guildId)
 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
@@ -129,19 +130,19 @@ client.on('messageCreate', message => {
 			}
 
 			raiders[raider].xp.highest = xpGained;
-			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) was added!`);
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) from server(${message.guildId}) was added!`);
 		}
 
 		raiders[raider].raids.total += 1;
 		raiders[raider].xp.total += xpGained;
 		raiders[raider].xp.lastRaid = xpGained;
-		
+
 		if (raiders[raider].xp.highest < xpGained)
-		raiders[raider].xp.highest = xpGained;
+			raiders[raider].xp.highest = xpGained;
 
 		if (raiders[raider].xp.lowest > xpGained || raiders[raider].xp.lowest === 0)
 			raiders[raider].xp.lowest = xpGained;
-		
+
 		if (descriptionVar.includes('Great job defeating the monster')) {
 			raiders[raider].raids.won += 1;
 			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
@@ -163,7 +164,7 @@ client.on('messageCreate', message => {
 			raiders[raider].elixirGained = 20;
 		}
 		raiders[raider].xp.last5Raids = raiders[raider].xp.last5Raids.slice(-5);
-		
+
 		// Convert the updated JavaScript object back to a JSON string
 		const updatedData = JSON.stringify(raiders, null, 2);
 
@@ -174,7 +175,7 @@ client.on('messageCreate', message => {
 				return;
 			}
 			// logs confirmation for data being updated
-			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) was updated!`);
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) from server(${message.guildId}) was updated!`);
 		});
 
 	});
@@ -197,4 +198,4 @@ function convertTimestampToIST(timestamp) {
 	return `${timeString} IST`;
 }
 
-client.login(config.token);
+client.login(config.testBotToken);
