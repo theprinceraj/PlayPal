@@ -57,15 +57,6 @@ for (const folder of commandsFolder) {
 }
 
 client.on('messageCreate', newMessage => {
-	const fs = require('fs');
-	const today = new Date();
-	const date = today.getUTCDate();
-	const month = today.getUTCMonth() + 1;
-	const year = today.getUTCFullYear();
-	const hours = today.getUTCHours();
-	const minutes = today.getUTCMinutes();
-	const seconds = today.getUTCSeconds();
-	const time = `${hours}:${minutes}:${seconds} ${date}/${month}/${year} `;
 	try {
 		if (
 			newMessage.author.bot &&
@@ -79,11 +70,6 @@ client.on('messageCreate', newMessage => {
 				})
 				.then(thread => {
 					thread.send('Please attach a screenshot proof to the above crosstrade here. It is a compulsory rule.');
-					fs.appendFile('./storeroom/crosstrades.txt', `\n${time} ==> ${newMessage.url}`, error => {
-						if (error) {
-							console.log(error);
-						}
-					});
 				})
 				.catch(error => `Failed to create thread for ${newMessage.url}`);
 		}
