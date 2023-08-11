@@ -69,5 +69,5 @@ exports.run = async (client, message, args0) => {
   }
 }
 
-exports.name = 'fakeSay'
+exports.name = 'fakesay'
 exports.aliases = ['fs']

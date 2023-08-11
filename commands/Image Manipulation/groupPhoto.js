@@ -35,5 +35,5 @@ exports.run = async (client, message, args) => {
 
 }
 
-exports.name = 'groupPhoto'
+exports.name = 'groupphoto'
 exports.aliases = ['gp']

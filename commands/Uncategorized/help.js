@@ -8,7 +8,7 @@ exports.run = (client, message, args) => {
     .addFields(
       {
         name: "**__Image Manipulation__**",
-        value: "**_fakesay_**, **_igfake_**, **_kick_**, **_spankfake_**, **_crysay_**, **__groupphoto__**",
+        value: "**_fakesay_**, **_igfake_**, **_kick_**, **_spankfake_**, **_crysay_**, **_groupphoto_**",
       },
       {
         name: "**__Fun__**",

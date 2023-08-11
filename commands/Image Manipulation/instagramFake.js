@@ -42,5 +42,5 @@ exports.run = async (client, message, args) => {
 
 }
 
-exports.name = 'instagramFake'
+exports.name = 'instagramfake'
 exports.aliases = ['ig', 'igfake']
