@@ -13,7 +13,7 @@ exports.run = async (client, message, args) => {
   if (!gameStatus) {
     const res = await fetch(`https://random-word-api.vercel.app/api?words=${randomWordCount}&length=${randomWordLength}`);
     const jsonOutput = await res.json();
-    console.log(jsonOutput);
+    
     const word = jsonOutput.join(' ');
     let embed = new EmbedBuilder()
       .setTitle("PlayPal's Type Race Game")
