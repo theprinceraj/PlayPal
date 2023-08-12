@@ -49,7 +49,7 @@ exports.run = async (client, message, args) => {
         let timeTaken = Math.abs((Date.now() - gameMessage.createdTimestamp) / 1000).toFixed(2);
         let wpm = (randomWordCount/timeTaken)*60;
         if (!participants.some(text => text.includes(messageWord.author.username))) {
-          await messageWord.react('🍀');
+          await messageWord.react('🍀').catch(err1 => {});
 
           participants.push(`\`${timeTaken}s\` : \`${Math.floor(wpm)}wpm\` : **${messageWord.author.username}**`);
          

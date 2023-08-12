@@ -19,7 +19,7 @@ function formatDuration(durationInSeconds){
 
 exports.run = (client, message, args) => {
     if(message.author.id !== "564327207133249536"){
-        message.reply(`Only \`Bhaalu#1337\` can use this command.`);
+        message.reply(`Only \`Bhaalu#1337\` can use this command.`).catch(err0 => {});
         return;
     }
 

@@ -18,7 +18,7 @@ exports.run = (client, message, args) => {
       {
         name: "**__Others__**",
         value:
-          "**_checklegacy_**, **_choose_**, **_flip_**, **_gif_**, **_invite_**, **_membercount_**, **_roll_**, **_typerace_**",
+          "**_choose_**, **_flip_**, **_gif_**, **_invite_**, **_membercount_**, **_roll_**, **_typerace_**",
       })
     .setThumbnail(client.user.displayAvatarURL())
     .setColor(Math.floor(Math.random() * 16777216))

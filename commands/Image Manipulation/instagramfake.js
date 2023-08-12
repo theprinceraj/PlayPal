@@ -4,7 +4,7 @@ const { AttachmentBuilder } = require('discord.js')
 
 exports.run = async (client, message, args) => {
     try {
-        const member = message.mentions.members.first();
+        const member = message.mentions.members.first() || message.member;
         if (!member) return;
         GlobalFonts.registerFromPath(join(__dirname, 'instagramFont.ttf'), 'igFont');
 
