@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
             return;
         }
         if (sentence.length !== 0) {
-            const baseImage = await loadImage(join(__dirname, 'phCommentProps.png')).catch(err1 => {
+            const baseImage = await loadImage(join(__dirname, 'phcommentProps.png')).catch(err1 => {
                 console.error('Error while loading the image.');
                 return;
             });
