@@ -32,7 +32,7 @@ exports.run = async (client, message, args) => {
 
             ctx.fillStyle = '#ef9535';
             ctx.font = '46px customFontBold';
-            ctx.fillText(message.mentions.users.first().username, 189, 1640); // writes person's name
+            ctx.fillText(member.displayName, 189, 1640); // writes person's name
 
             ctx.fillStyle = '#ffffff';
             ctx.font = '40px customFont';
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
             })
         }
     } catch (e) {
-        console.error(`\n\nError encountered inside crySay.js:\n${e}`);
+        console.error(`\n\nError encountered inside phcomment.js:\n${e}`);
         return;
     }
 }
