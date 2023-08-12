@@ -9,20 +9,18 @@ const {
 const fs = require('fs');
 const { join } = require('path')
 
-exports.run = async (client, message, args0) => {
+exports.run = async (client, message, args) => {
   try {
     const member = message.mentions.members.first() || message.member;
     if (!member) return;
     const roleList = member.roles.cache;
     const topRole = roleList.first().id;
 
-
     GlobalFonts.registerFromPath(join(__dirname, 'gg sans Regular.ttf'), 'gg_sans');
-    const args = message.content.split(' ')
+
     const pingRegex = /^</
-    if (pingRegex.test(args[1]))
-      args.splice(0, 2);
-    else args.splice(0, 1);
+    if (pingRegex.test(args[0]))
+      args.splice(0, 1);
     const sentence = args.join(' ')
     if (sentence.length < 55) {
       const image = await loadImage(join(__dirname, 'fakeSayProps.jpg'))
