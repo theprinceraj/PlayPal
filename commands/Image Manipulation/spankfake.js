@@ -5,7 +5,10 @@ const { AttachmentBuilder } = require("discord.js");
 exports.run = async (client, message, args) => {
   try {
     const member = message.mentions.members.first();
-    if (!member) return;
+    if (!member) {
+      message.reply('Correct format: `!!spankfake <@user>`').catch(err1 => { })
+      return;
+    }
     const img = await loadImage(join(__dirname, "spankFakeProps.jpg")).catch(
       (err1) => {
         console.error(`error loading the image`);
@@ -33,7 +36,7 @@ exports.run = async (client, message, args) => {
     ctxFinal.drawImage(imageWithOneAvatar, 0, 0); // drawing the image with mentioned user's avatar
 
     const authorAvatar = await loadImage(message.author.displayAvatarURL());
-    
+
     ctxFinal.strokeStyle = "black"; // Border color
     ctxFinal.lineWidth = 10; // Border width
     ctxFinal.strokeRect(0, 0, canvasFinal.width, canvasFinal.height);

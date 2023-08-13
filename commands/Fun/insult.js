@@ -1,7 +1,10 @@
 
 exports.run = (client, message, args) => {
   const user = message.mentions.users.first() || message.author;
-  if (!user) return;
+  if (!user){
+    message.reply('Correct format: `!!insult <@user>`').catch(err1 => { })
+    return;
+  } 
   const insults = [
     "Your sense of humor is as dry as a Gujarati dhokla, ${user}.",
     "You're like a samosa without any filling - all shell and no substance, ${user}.",

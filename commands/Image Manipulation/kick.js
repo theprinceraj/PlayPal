@@ -5,7 +5,10 @@ const { AttachmentBuilder } = require("discord.js");
 exports.run = async (client, message, args) => {
   try {
     const member = message.mentions.members.first();
-    if (!member) return;
+    if (!member){
+      message.reply('Correct format: `!!kick <@user>`').catch(err1 => { })
+      return;
+    } 
     const image = await loadImage(join(__dirname,'kickProps.png'));
     const canvas = createCanvas(image.width, image.height);
     const ctx = canvas.getContext('2d');
