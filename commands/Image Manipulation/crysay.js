@@ -9,7 +9,7 @@ const { join } = require('path');
 exports.run = async (client, message, args) => {
     try {
         if(args.length === 0){
-            message.reply('Correct format: !!crysay <message>').catch(err1 => { })
+            message.reply('Correct format: `!!crysay <message>`').catch(err1 => { })
             return;
         }
         const sentence = args.join(' ');
