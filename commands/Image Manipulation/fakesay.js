@@ -65,7 +65,7 @@ exports.run = async (client, message, args) => {
         return;
       })
       setTimeout(() => {
-        message.delete()
+        message.delete().catch(err0 => {})
       },)
     }
   } catch (e) {
