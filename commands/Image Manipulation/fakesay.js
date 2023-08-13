@@ -11,6 +11,10 @@ const { join } = require('path')
 
 exports.run = async (client, message, args) => {
   try {
+    if (args.length === 0) {
+      message.reply('Correct format: !!fakesay <@user> <message>').catch(err1 => { })
+      return;
+    }
     const member = message.mentions.members.first() || message.member;
     if (!member) return;
     const roleList = member.roles.cache;
@@ -22,7 +26,9 @@ exports.run = async (client, message, args) => {
     if (pingRegex.test(args[0]))
       args.splice(0, 1);
     const sentence = args.join(' ')
-    if (sentence.length < 55) {
+    if (sentence.length > 55) {
+      message.reply(`Your message exceeds 55 characters limit.`).catch(err1 => { })
+    } else {
       const image = await loadImage(join(__dirname, 'fakeSayProps.jpg'))
         .catch(err1 => {
           console.error(`error loading the image`)
