@@ -1,3 +1,5 @@
 node_modules
 storeroom/raiders.json
 script.js
+package.json
+package-lock.json
