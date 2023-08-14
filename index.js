@@ -147,7 +147,7 @@ client.on('messageCreate', message => {
 		else if (descriptionVar.includes('Better luck next time')) {
 			raiders[raider].xp.last5Raids.push(`Lost(XP = ${xpGained})`);
 			raiders[raider].raids.lost += 1;
-			raiders[raider].elixirGained = 20;
+			raiders[raider].elixirGained += 20;
 		}
 		raiders[raider].xp.last5Raids = raiders[raider].xp.last5Raids.slice(-5);
 
