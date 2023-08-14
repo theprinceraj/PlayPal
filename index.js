@@ -77,7 +77,6 @@ client.on('messageCreate', newMessage => {
 });
 
 client.on('messageCreate', message => {
-	// console.log(message.guildId)
 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
