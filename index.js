@@ -171,7 +171,8 @@ client.on('messageCreate', newMessage => {
 // Using firebase
 const firebase = require('./firebase.js');
 client.on('messageCreate', message => {
-	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
+	if (message.author.id === '853629533855809596') return;
+	// if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
 	if (!descriptionVar || descriptionVar?.includes('Difficulty') === false || descriptionVar?.includes('Reroll Scrolls')) return;
