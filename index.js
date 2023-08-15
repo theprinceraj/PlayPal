@@ -76,7 +76,7 @@ client.on('messageCreate', newMessage => {
 });
 
 // Using json file as database
-client.on('messageCreate', message => {
+/*client.on('messageCreate', message => {
 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
@@ -165,7 +165,7 @@ client.on('messageCreate', message => {
 
 	});
 
-});
+});*/
 
 
 // Using firebase
@@ -208,7 +208,7 @@ client.on('messageCreate', message => {
 			raiderData.xp.highest = xpGained;
 
 			// Logs confirmation for new raider addition
-			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) from server(${message.guildId}) was added(firebase)!`);
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) from server(${message.guildId}) was added!`);
 		}
 
 		raiderData.raids.total += 1;
@@ -251,7 +251,7 @@ client.on('messageCreate', message => {
 			}
 
 			// logs confirmation that data has been updated
-			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) from server(${message.guildId}) was updated(firebase)!`);
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) from server(${message.guildId}) was updated with [netElixir:${raiderData.elixirGained}, xpGained:${xpGained}]!`);
 		});
 	});
 
