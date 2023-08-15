@@ -47,7 +47,7 @@ exports.run = (client, message, args) => {
                     { name: '<a:rocket_emoji:1141006841132879872> Add Me', value: `[Click here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot)` }
                 )
 
-            message.reply({ content: 'Grace period for the guild season ends <t:1692136800:R>. The raid stats for everyone(in PlayPal) will be reset <t:1692124260:R>. Message @bhaalu if you have any queries.', embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
+            message.reply({ content: 'Grace period for the guild season ends <t:1692167340:R>. The raid stats for everyone(in PlayPal) will be reset <t:1692163800:R>. Message @bhaalu if you have any queries.', embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
             // message.reply({ embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
         })
 
