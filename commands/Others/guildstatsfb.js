@@ -43,11 +43,12 @@ exports.run = (client, message, args) => {
                 .addFields(
                     { name: '⚔️ Raids', value: `Total: \`${raiderData.raids.total}\`\nWins: \`${raiderData.raids.won}\`\nLosses: \`${raiderData.raids.lost}\`` },
                     { name: '<:elixir_icon:1138401766216577044> Elixirs', value: `Total: \`${raiderData.elixirGained}\`` },
-                    { name: '<:mathsymbol:1137801859772461116> XP', value: `Total: \`${raiderData.xp.total}\`\nHighest: \`${raiderData.xp.highest}\`\nLowest: \`${raiderData.xp.lowest}\`\nLast Raid: \`${raiderData.xp.lastRaid}\`\nAverage: \`${Math.round(raiderData.xp.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.xp.last5Raids.join(', ')}\`` },
-                    { name: '✨ Add Me', value: `[Click here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot)` }
+                    { name: '🎓 XP', value: `Total: \`${raiderData.xp.total}\`\nHighest: \`${raiderData.xp.highest}\`\nLowest: \`${raiderData.xp.lowest}\`\nLast Raid: \`${raiderData.xp.lastRaid}\`\nAverage: \`${Math.round(raiderData.xp.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.xp.last5Raids.join(', ')}\`` },
+                    { name: '<a:rocket_emoji:1141006841132879872> Add Me', value: `[Click here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot)` }
                 )
 
-            message.reply({ embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
+            message.reply({ content: 'Grace period for the guild season ends <t:1692136800:R>. The raid stats for everyone(in PlayPal) will be reset <t:1692124260:R>. Message @bhaalu if you have any queries.', embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
+            // message.reply({ embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
         })
 
     } catch (e) {
