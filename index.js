@@ -252,7 +252,7 @@ client.on('messageCreate', message => {
 			}
 
 			// logs confirmation that data has been updated
-			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) from server(${message.guildId}) was updated with [netElixir:${raiderData.elixirGained}, xpGained:${xpGained}]!`);
+			console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) was updated with [netElixir:${raiderData.elixirGained}, xpGained:${xpGained}]!`);
 		});
 	});
 
