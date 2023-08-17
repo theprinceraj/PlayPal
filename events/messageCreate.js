@@ -3,7 +3,7 @@ module.exports = (client, message) => {
 
   // Check if bot has send message perms in the channel
   if (!message.guild.members.me.permissionsIn(message.channel).has('SEND_MESSAGES')){
-    message.author.send(`Sorry, but I do not have necessary permissions in \`#${message.channel.name}\``)
+    message.author.send(`Sorry, but I do not have necessary permissions in \`#${message.channel.name}\``).catch(err => {})
     return;
   } 
 
