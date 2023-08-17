@@ -25,7 +25,7 @@ client.on('ready', () => {
 	client.user.setPresence({ activities: [{ name: 'JavaScript', type: ActivityType.Competing }] });
 	setInterval(() => {
 		console.log(`${convertTimestampToIST(Date.now())}: ${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
-	}, 10*60*60*1000);
+	}, 10 * 60 * 60 * 1000);
 });
 
 client.config = config;
@@ -41,7 +41,7 @@ client.commands = new Collection();
 const commandsFolder = fs.readdirSync(`./commands`);
 for (const folder of commandsFolder) {
 	const commands = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
-	console.log(`***********>>>>>${folder}<<<<<***********`);
+	console.log(`${folder}`);
 	for (const file of commands) {
 		const commandName = file.split('.')[0];
 		const command = require(`./commands/${folder}/${file}`);
@@ -49,21 +49,21 @@ for (const folder of commandsFolder) {
 			command.aliases.forEach(alias => {
 				client.commands.set(alias, command);
 			});
-			console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
+			// console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
 		}
 		client.commands.set(commandName, command);
-		if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
+		// if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
 	}
 }
 
-client.on('messageCreate', newMessage => {
+client.on('messageCreate', tradeRequestMessage => {
 	try {
 		if (
-			newMessage.author.bot &&
-			newMessage.embeds[0].description.includes('sent a trade request') &&
-			newMessage.channel.id === '950783355614539778'
+			tradeRequestMessage.author.bot &&
+			tradeRequestMessage.embeds[0].description.includes('sent a trade request') &&
+			tradeRequestMessage.channel.id === '950783355614539778'
 		) {
-			const thread = newMessage
+			const thread = tradeRequestMessage
 				.startThread({
 					name: `Send Crosstrade Proof:`,
 					autoArchiveDuration: 24 * 60,
@@ -71,7 +71,7 @@ client.on('messageCreate', newMessage => {
 				.then(thread => {
 					thread.send('Please attach a screenshot proof to the above crosstrade here. It is a compulsory rule.');
 				})
-				.catch(error => `Failed to create thread for ${newMessage.url}`);
+				.catch(error => `Failed to create thread for ${tradeRequestMessage.url}`);
 		}
 	} catch (error) { }
 });
