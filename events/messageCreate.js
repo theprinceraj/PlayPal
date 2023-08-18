@@ -1,11 +1,11 @@
 module.exports = (client, message) => {
   if (message.author.bot) return;
 
-  // Check if bot has send message perms in the channel
-  // if (!message.guild.members.me.permissionsIn(message.channel).has('SEND_MESSAGES')){
-  //   message.author.send(`Sorry, but I do not have necessary permissions in \`#${message.channel.name}\``).catch(err => {})
-  //   return;
-  // } 
+  // Check if bot has SEND_MESSAGES perms in the channel
+  if (!message.guild?.members.me.permissionsIn(message.channel).has('0x0000000000000800')) {
+    message.author.send(`Sorry, but I do not have necessary permissions in \`#${message.channel.name}\``).catch(err => { })
+    return;
+  }
 
   // Ignore messages not starting with the prefix (in config.json)
   if (message.content.indexOf(client.config.prefix) !== 0) return;
