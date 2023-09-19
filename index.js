@@ -132,15 +132,15 @@ client.on('messageCreate', message => {
 
 		if (descriptionVar.includes('Great job defeating the monster')) {
 			raiderData.raids.won += 1;
-			if (descriptionVar.includes('\nDifficulty: **Easy**')) {
+			if (descriptionVar.includes('\nDifficulty:       **Easy**')) {
 				raiderData.xp.last5Raids.push(`Easy Win(XP = ${xpGained})`);
 				raiderData.elixirGained += 80;
 			}
-			else if (descriptionVar.includes('\nDifficulty: **Medium**')) {
+			else if (descriptionVar.includes('\nDifficulty:       **Medium**')) {
 				raiderData.xp.last5Raids.push(`Medium Win(XP = ${xpGained})`);
 				raiderData.elixirGained += 110;
 			}
-			else if (descriptionVar.includes('\nDifficulty: **Hard**')) {
+			else if (descriptionVar.includes('\nDifficulty:       **Hard**')) {
 				raiderData.xp.last5Raids.push(`Hard Win(XP = ${xpGained})`);
 				raiderData.elixirGained += 170;
 			}
