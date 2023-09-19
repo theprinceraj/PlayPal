@@ -83,7 +83,7 @@ client.on('messageCreate', message => {
 	// if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
-	if (!descriptionVar || descriptionVar?.includes('Difficulty') === false || descriptionVar?.includes('Reroll Scrolls')) return;
+	if (!descriptionVar || descriptionVar?.includes('Difficulty') === false || descriptionVar?.includes('Shared XP Summary')) return;
 
 	const xpRegex = /\+\d+/;
 	const matchXp = descriptionVar.match(xpRegex);
