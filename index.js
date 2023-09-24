@@ -23,6 +23,7 @@ const client = new Client({
 
 client.on('ready', () => {
 	client.user.setPresence({ activities: [{ name: 'JavaScript', type: ActivityType.Competing }] });
+	console.log(`${convertTimestampToIST(Date.now())}: ${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
 	setInterval(() => {
 		console.log(`${convertTimestampToIST(Date.now())}: ${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
 	}, 10 * 60 * 60 * 1000);
@@ -83,7 +84,7 @@ client.on('messageCreate', message => {
 	// if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
-	if (!descriptionVar || descriptionVar?.includes('Difficulty') === false || !descriptionVar?.includes('Shared XP Summary')) return;
+	if (!descriptionVar || descriptionVar?.includes('mock raid')) return;
 
 	const xpRegex = /\+\d+/;
 	const matchXp = descriptionVar.match(xpRegex);
@@ -130,7 +131,7 @@ client.on('messageCreate', message => {
 		if (raiderData.xp.lowest > xpGained || raiderData.xp.lowest === 0)
 			raiderData.xp.lowest = xpGained;
 
-		if (descriptionVar.includes('Great job defeating the monster')) {
+		if (descriptionVar.includes('Great Job')) {
 			raiderData.raids.won += 1;
 			if (descriptionVar.includes('**Easy**')) {
 				raiderData.xp.last5Raids.push(`Easy Win(XP = ${xpGained})`);
