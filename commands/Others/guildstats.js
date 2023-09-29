@@ -45,7 +45,7 @@ exports.run = (client, message, args) => {
                 return;
             }
 
-            const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season.txt'), 'Guild_Stats_September_2nd_Season.txt')
+            const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season_copy.txt'), 'Guild_Stats_September_2nd_Season_copy.txt')
 
             // Make embed for displaying stats
             let statsDisplayEmbed = new EmbedBuilder()
