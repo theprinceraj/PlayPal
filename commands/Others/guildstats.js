@@ -40,12 +40,16 @@ exports.run = (client, message, args) => {
         const raidersRef = firebase.database().ref('raiders');
         raidersRef.child(raiderSearched.id).once('value', async (snapshot) => {
             const raiderData = snapshot.val();
+
+            const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season_copy.txt'), 'Guild_Stats_September_2nd_Season_copy.txt')
+
             if (!raiderData) {
                 message.reply('No stat found, do a raid with `sgr` and then try again.').catch(err => console.log(err));
+                message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
+
                 return;
             }
 
-            const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season_copy.txt'), 'Guild_Stats_September_2nd_Season_copy.txt')
 
             // Make embed for displaying stats
             let statsDisplayEmbed = new EmbedBuilder()
