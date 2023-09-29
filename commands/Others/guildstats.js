@@ -1,4 +1,5 @@
-const { EmbedBuilder, StringSelectMenuOptionBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const { EmbedBuilder, StringSelectMenuOptionBuilder, StringSelectMenuBuilder, ActionRowBuilder, AttachmentBuilder } = require('discord.js');
+const path = require('node:path');
 const firebase = require('../../firebase.js');
 
 function convertArrayToString(arr) {
@@ -44,6 +45,8 @@ exports.run = (client, message, args) => {
                 return;
             }
 
+            const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season.txt'), 'Guild_Stats_September_2nd_Season.txt')
+
             // Make embed for displaying stats
             let statsDisplayEmbed = new EmbedBuilder()
                 .setTitle(`**Raider Stats for \`${raiderSearched.username}\`**`)
@@ -80,6 +83,9 @@ exports.run = (client, message, args) => {
 
                 let initialMessage = await message.reply({ embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
 
+
+                message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
+
                 client.on('interactionCreate', async (interaction) => {
                     if (!interaction.isStringSelectMenu() || interaction.customId !== 'guild-stats-dropdown') return;
                     let arrayOfRaiders = [];
@@ -96,7 +102,7 @@ exports.run = (client, message, args) => {
                         sortedArray = arrayOfRaiders.sort((a, b) => b.totalXp - a.totalXp)
                     }
 
-                    let trimmedArrayOfRaiders = sortedArray.slice(0,6);
+                    let trimmedArrayOfRaiders = sortedArray.slice(0, 6);
 
                     // Remove fields from the embed
                     [0, 1, 2].forEach(index => {
@@ -105,11 +111,13 @@ exports.run = (client, message, args) => {
                     statsDisplayEmbed.setTitle('Overall Stats')
                     statsDisplayEmbed.setDescription(convertArrayToString(trimmedArrayOfRaiders))
 
-                    initialMessage.edit({ embeds: [statsDisplayEmbed], components: [actionRow] }).catch(e => {})
+                    initialMessage.edit({ embeds: [statsDisplayEmbed], components: [actionRow] }).catch(e => { })
                 });
             } else {
-                // message.reply({ content: 'Grace period for the guild season ends <t:1692210540:R>. The raid stats for everyone(in PlayPal) will be reset <t:1692206940:R>. Message @bhaalu if you have any queries.', embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
-                message.reply({ embeds: [statsDisplayEmbed] }).catch(err => console.log(err))
+
+                message.reply({ embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
+
+                message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
             }
         })
 
