@@ -21,7 +21,7 @@ exports.run = async (client, message, args) => {
         array.unshift(`Guild Stats - September Second Season`);
         const finalFileText = array.join(`\n\n===========================================\n\n`)
 
-        fs.writeFile(`storeroom/Guild_Stats_September_1st_Season.txt`, finalFileText, 'utf8', err => { })
+        fs.writeFile(`storeroom/Guild_Stats_September_2nd_Season.txt`, finalFileText, 'utf8', err => { })
 
         const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_1st_Season.txt'), 'Guild_Stats_September_1st_Season.txt')
         message.reply({ content: `Here is the text file the great respected honourable esteemed distinguished courteous revered gracious eminent polite regal admirable sir.`, files: [att] }).catch(error => console.error(error));
