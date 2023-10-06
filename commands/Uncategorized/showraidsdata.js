@@ -18,17 +18,18 @@ exports.run = async (client, message, args) => {
             array.push(`Raider ID: ${raiderKey}\nElixir Gained:${raiderData.elixirGained}\nRaids Lost: ${raiderData.raids.lost}\nRaids Won: ${raiderData.raids.won}\nTotal Raids: ${raiderData.raids.total}\nTotal XP: ${raiderData.xp.total}\nHighest XP: ${raiderData.xp.highest}\nLowest XP: ${raiderData.xp.lowest}\nMost Recent Raid XP: ${raiderData.xp.lastRaid}`);
 
         });
-        array.unshift(`Guild Stats - September Second Season`);
+        array.unshift(`Guild Stats - October First Season`);
         const finalFileText = array.join(`\n\n===========================================\n\n`)
 
-        fs.writeFile(`storeroom/Guild_Stats_September_2nd_Season.txt`, finalFileText, 'utf8', err => { })
+        fs.writeFile(`storeroom/Guild_Stats_October_1st_Season.txt`, finalFileText, 'utf8', err => { })
 
-        const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_September_2nd_Season.txt'), 'Guild_Stats_September_2nd_Season.txt')
-        message.reply({ content: `Here is the text file the great respected honourable esteemed distinguished courteous revered gracious eminent polite regal admirable sir.`, files: [att] }).catch(error => console.error(error));
+        const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats_October_1st_Season.txt'), 'Guild_Stats_October_1st_Season.txt')
+        message.reply({ content: `Here is the text file.`, files: [att] }).catch(error => console.error(error));
 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
 
-exports.name = 'endguildseason'
+exports.name = 'showraidsdata';
+exports.aliases = ['srd'];
