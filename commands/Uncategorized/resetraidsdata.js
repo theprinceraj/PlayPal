@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
     snapshot.ref.remove();
 
 
-    console.log(`\n\nRAID DATA WAS RESET BY ${message.author.name}\n\n`);
+    console.log(`\n\nRAID DATA WAS RESET BY ${message.author.username}\n\n`);
 
     message.reply('Raid data has been reset!').catch(console.error);
 }
