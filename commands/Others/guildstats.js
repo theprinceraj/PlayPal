@@ -85,7 +85,7 @@ exports.run = (client, message, args) => {
                 const actionRow = new ActionRowBuilder()
                     .addComponents(select)
 
-                let initialMessage = await message.reply({ embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
+                let initialMessage = await message.reply({ content: 'I have pushed a fix for abnormal total raids count. Please report to me if you encounter an issue again.', embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
 
 
                 // message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
