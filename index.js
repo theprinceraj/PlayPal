@@ -84,6 +84,7 @@ client.on('messageCreate', message => {
 	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
+	if (message.embeds[0]?.title !== 'RAID: ENDED') return;
 	if (!descriptionVar || descriptionVar?.includes('mock raid')) return;
 
 	const xpRegex = /\+\d+/;
