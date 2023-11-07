@@ -62,7 +62,7 @@ exports.run = (client, message, args) => {
                     { name: '⚔️ Raids', value: `Total: \`${raiderData.raids.total}\`\nWins: \`${raiderData.raids.won}\`\nLosses: \`${raiderData.raids.lost}\`` },
                     { name: '<:elixir_icon:1138401766216577044> Elixirs', value: `Total: \`${raiderData.elixirGained}\`` },
                     { name: '🎓 XP', value: `Total: \`${raiderData.xp.total}\`\nHighest: \`${raiderData.xp.highest}\`\nLowest: \`${raiderData.xp.lowest}\`\nLast Raid: \`${raiderData.xp.lastRaid}\`\nAverage: \`${Math.round(raiderData.xp.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.xp.last5Raids.join(', ')}\`` },
-                    { name: '<a:rocket_emoji:1141006841132879872> Add Me', value: `[Click here](https://discord.com/api/oauth2/authorize?client_id=1104277580577783848&permissions=395137371201&scope=bot)` }
+                    { name: '<a:rocket_emoji:1141006841132879872> Join my support server to report issues or bugs or downtimes', value: `[Click here](https://discord.gg/SxwEffMWch)` }
                 )
 
             if (message.author.id === '564327207133249536') {
@@ -85,7 +85,7 @@ exports.run = (client, message, args) => {
                 const actionRow = new ActionRowBuilder()
                     .addComponents(select)
 
-                let initialMessage = await message.reply({ content: 'I have pushed a fix for abnormal total raids count. Please report to me if you encounter an issue again.', embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
+                let initialMessage = await message.reply({ content: 'Sorry for bot being offline for almost 24 hours. I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
 
 
                 // message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
