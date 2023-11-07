@@ -119,7 +119,7 @@ exports.run = (client, message, args) => {
                 });
             } else {
 
-                message.reply({ content: 'I have pushed a fix for abnormal total raids count. Please report to me if you encounter an issue again.', embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
+                message.reply({ content: 'Sorry for bot being offline for almost 24 hours. I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
 
                 // message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
             }
