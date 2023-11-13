@@ -44,8 +44,7 @@ exports.run = (client, message, args) => {
                 message.reply('No stat found, do a raid with `sgr` and then try again.').catch(err => console.log(err));
                 return;
             }
-
-
+            
             // Make embed for displaying stats
             let statsDisplayEmbed = new EmbedBuilder()
                 .setTitle(`**Raider Stats for \`${raiderSearched.username}\`**`)
