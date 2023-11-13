@@ -85,7 +85,7 @@ exports.run = (client, message, args) => {
                 const actionRow = new ActionRowBuilder()
                     .addComponents(select)
 
-                let initialMessage = await message.reply({ content: 'Sorry for bot being offline for almost 24 hours. I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
+                let initialMessage = await message.reply({ content: '', embeds: [statsDisplayEmbed], components: [actionRow] }).catch(err => console.log(err))
 
 
                 // message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
@@ -119,7 +119,7 @@ exports.run = (client, message, args) => {
                 });
             } else {
 
-                message.reply({ content: 'Sorry for bot being offline for almost 24 hours. I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
+                message.reply({ content: 'I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
 
                 // message.reply({ content: `Here is the raid data for the previous season. It won't be sent after 24 hours so make sure that you save it right now!`, files: [att] }).catch(error => console.error(error));
             }
