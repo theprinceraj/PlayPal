@@ -1,7 +1,5 @@
 const firebase = require('../../firebase.js');
 const fs = require('fs');
-const path = require('node:path');
-const { AttachmentBuilder } = require('discord.js')
 
 exports.run = async (client, message, args) => {
     try {
@@ -19,10 +17,10 @@ exports.run = async (client, message, args) => {
             array.push(`Raider ID: ${raiderKey}\nElixir Gained:${raiderData.elixirGained}\nRaids Lost: ${raiderData.raids.lost}\nRaids Won: ${raiderData.raids.won}\nTotal Raids: ${raiderData.raids.total}\nTotal XP: ${raiderData.xp.total}\nHighest XP: ${raiderData.xp.highest}\nLowest XP: ${raiderData.xp.lowest}\nMost Recent Raid XP: ${raiderData.xp.lastRaid}`);
 
         });
-        array.unshift(`Guild Stats - October First Season`);
+        array.unshift(`Guild Stats`);
         const finalFileText = array.join(`\n\n===========================================\n\n`)
 
-        fs.writeFile(`storeroom/Guild_Stats_October_1st_Season.txt`, finalFileText, 'utf8', err => { })
+        fs.writeFile(`storeroom/Guild_Stats.txt`, finalFileText, 'utf8', err => { })
 
 
         snapshot.ref.remove();
