@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const firebase = require('../../firebase.js');
 
 function convertArrayToString(arr) {
@@ -58,8 +58,15 @@ exports.run = (client, message, args) => {
                     { name: '🎓 XP', value: `Total: \`${raiderData.xp.total}\`\nHighest: \`${raiderData.xp.highest}\`\nLowest: \`${raiderData.xp.lowest}\`\nLast Raid: \`${raiderData.xp.lastRaid}\`\nAverage: \`${Math.round(raiderData.xp.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.xp.last5Raids.join(', ')}\`` },
                     { name: '<a:rocket_emoji:1141006841132879872> Join my support server to report issues or bugs or downtimes', value: `[Click here](https://discord.gg/SxwEffMWch)` }
                 )
+                
+            const websiteViewButton = new ButtonBuilder()
+                .setLabel('View On Website')
+                .setURL(`https://playpal-sigma.vercel.app/api/search?userId=${raiderSearched.id}`)
+                .setStyle(ButtonStyle.Link);
+            const row = new ActionRowBuilder()
+                .addComponents(websiteViewButton);
 
-            message.reply({ content: 'I just made a support server now for reporting such issues, join if you want to!', embeds: [statsDisplayEmbed] }).catch(err => console.log(err));
+            message.reply({ content: '', embeds: [statsDisplayEmbed], components: [row] }).catch(err => console.log(err));
 
         })
 

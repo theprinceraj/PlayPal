@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
         fs.writeFile(`storeroom/Guild_Stats.txt`, finalFileText, 'utf8', err => { })
 
         const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats.txt'), 'Guild_Stats.txt');
-        message.reply({ content: `Here is the text file.`, files: [att] }).catch(error => console.error(error));
+        message.reply({ content: ``, files: [att] }).catch(error => console.error(error));
 
     } catch (error) {
         console.error('Error fetching data:', error);
