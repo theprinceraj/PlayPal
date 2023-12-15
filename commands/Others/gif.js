@@ -1,5 +1,3 @@
-const { EmbedBuilder } = require('discord.js');
-
 exports.run = async (client, message, args) => {
     const TENOR_API_KEY = client.config.TENOR_API_TOKEN;
     try {
