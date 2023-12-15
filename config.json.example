@@ -1,0 +1,19 @@
+{
+  "token": "",
+  "testBotToken": "",
+  "prefix": "!!",
+  "clientId": "",
+  "guildId": "",
+  "TENOR_API_TOKEN": "",
+  "GIPHY_API_TOKEN": "",
+  "FIREBASE": {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "measurementId": ""
+  }
+}

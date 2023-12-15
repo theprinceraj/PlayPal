@@ -1,4 +1,7 @@
+const config = require('./config.json');
+
 const firebase = require('firebase');
+
 const firebaseConfig = {
 	apiKey: "AIzaSyBNNtpK9M51EPMF19slOmX_Ld7HrT-dss8",
 	authDomain: "raiders-628d9.firebaseapp.com",
