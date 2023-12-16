@@ -13,7 +13,7 @@ exports.run = (client, message, args) => {
       {
         name: "**__Fun__**",
         value:
-          "**_buba_**, **_gay_**, **_insult_**, **_iq_**, **_luck_**, **_pp_**",
+          "**_buba_**, **_gay_**, **_insult_**, **_iq_**, **_luck_**, **_pp_**, **__slap__**", 
       },
       {
         name: "**__Others__**",
