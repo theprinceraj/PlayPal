@@ -2,3 +2,4 @@ node_modules
 storeroom/raiders.json
 script.js
 config.json
+.env
