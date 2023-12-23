@@ -22,6 +22,7 @@ const client = new Client({
 
 
 client.on('ready', () => {
+	console.clear();
 	client.user.setPresence({ activities: [{ name: 'JavaScript', type: ActivityType.Competing }] });
 	console.log(`${convertTimestampToIST(Date.now())}: ${client.user.tag} is serving in ${client.guilds.cache.size} servers.`);
 	setInterval(() => {
