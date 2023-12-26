@@ -79,8 +79,8 @@ client.on('messageCreate', tradeRequestMessage => {
 // Using firebase
 const firebase = require('./firebase.js');
 client.on('messageCreate', message => {
-	// if (message.author.id !== '853629533855809596') return;
-	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
+	if (message.author.id !== '853629533855809596') return;
+	// if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
 	if (message.embeds[0]?.title !== 'RAID: ENDED') return;
@@ -102,11 +102,8 @@ client.on('messageCreate', message => {
 			// Create new raider
 			raiderData = {
 				raids: {
-					total: 0,
-					won: 0,
-					lost: 0
+					total: 0
 				},
-				elixirGained: 0,
 				xp: {
 					total: 0,
 					highest: 0,
@@ -131,37 +128,16 @@ client.on('messageCreate', message => {
 		if (raiderData.xp.lowest > xpGained || raiderData.xp.lowest === 0)
 			raiderData.xp.lowest = xpGained;
 
-		if (descriptionVar.includes('Great Job')) {
-			raiderData.raids.won += 1;
-			if (descriptionVar.includes('**Easy**')) {
-				raiderData.xp.last5Raids.push(`Easy Win(XP = ${xpGained})`);
-				raiderData.elixirGained += 80;
-			}
-			else if (descriptionVar.includes('**Medium**')) {
-				raiderData.xp.last5Raids.push(`Medium Win(XP = ${xpGained})`);
-				raiderData.elixirGained += 110;
-			}
-			else if (descriptionVar.includes('**Hard**')) {
-				raiderData.xp.last5Raids.push(`Hard Win(XP = ${xpGained})`);
-				raiderData.elixirGained += 170;
-			}
-		}
-		else if (descriptionVar.includes('Better luck next time')) {
-			raiderData.xp.last5Raids.push(`Lost(XP = ${xpGained})`);
-			raiderData.raids.lost += 1;
-			raiderData.elixirGained += 20;
-		}
-		raiderData.xp.last5Raids = raiderData.xp.last5Raids.slice(-5);
+		raiderData.xp.last5Raids.push(`${xpGained}`);
+		raiderData.xp.last5Raids = raiderData.xp.last5Raids.slice(1);
 
+		console.log(raiderData);
 		// Update Firebase with the modified data
 		raidersRef.child(raider).set(raiderData, (error) => {
 			if (error) {
 				console.error('\nError writing to Firebase:', error);
 				return;
 			}
-
-			// logs confirmation that data has been updated
-			// console.log(`${convertTimestampToIST(message.createdTimestamp)}: Raider(${raider}) was updated with [netElixir:${raiderData.elixirGained}, xpGained:${xpGained}]!`);
 		});
 	});
 
@@ -184,4 +160,4 @@ function convertTimestampToIST(timestamp) {
 	return `${timeString} IST`;
 }
 
-client.login(client.config.token);
+client.login(client.config.testBotToken);
