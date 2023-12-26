@@ -131,7 +131,6 @@ client.on('messageCreate', message => {
 		raiderData.xp.last5Raids.push(`${xpGained}`);
 		raiderData.xp.last5Raids = raiderData.xp.last5Raids.slice(1);
 
-		console.log(raiderData);
 		// Update Firebase with the modified data
 		raidersRef.child(raider).set(raiderData, (error) => {
 			if (error) {
