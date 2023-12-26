@@ -51,10 +51,8 @@ for (const folder of commandsFolder) {
 			command.aliases.forEach(alias => {
 				client.commands.set(alias, command);
 			});
-			// console.log(`Loaded ${commandName} with aliases: ${command.aliases}`);
 		}
 		client.commands.set(commandName, command);
-		// if (!command.aliases) console.log(`Loaded ${commandName} with no aliases`);
 	}
 }
 
