@@ -63,7 +63,7 @@ client.on('messageCreate', tradeRequestMessage => {
 			tradeRequestMessage.embeds[0].description.includes('sent a trade request') &&
 			tradeRequestMessage.channel.id === '950783355614539778'
 		) {
-			const thread = tradeRequestMessage
+			tradeRequestMessage
 				.startThread({
 					name: `Send Crosstrade Proof:`,
 					autoArchiveDuration: 24 * 60,
