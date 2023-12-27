@@ -79,17 +79,17 @@ client.on('messageCreate', tradeRequestMessage => {
 // Using firebase
 const firebase = require('./firebase.js');
 client.on('messageCreate', message => {
-	if (message.author.id !== '853629533855809596') return;
-	// if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
+	// if (message.author.id !== '853629533855809596') return;
+	if (!['853629533855809596', '235148962103951360'].includes(message.author.id)) return;
 	const descriptionVar = message.embeds[0]?.description;
 
 	if (message.embeds[0]?.title !== 'RAID: ENDED') return;
 	if (!descriptionVar || descriptionVar?.includes('mock raid')) return;
 
-	const xpRegex = /\+\d+/;
-	const matchXp = descriptionVar.match(xpRegex);
-	if (!matchXp) return;
-	const xpGained = parseInt(matchXp[0].slice(1));
+	const scoreRegex = /\*\d+/;
+	const matchScore = descriptionVar.match(scoreRegex);
+	if (!matchScore) return;
+	const scoreGained = parseInt(matchScore[0].slice(1));
 
 	// Fetching user mentioned from the raid result embed
 	const raider = message?.mentions?.users.first()?.id || descriptionVar.match(/<@(\d+)>/)[1];
@@ -104,7 +104,7 @@ client.on('messageCreate', message => {
 				raids: {
 					total: 0
 				},
-				xp: {
+				score: {
 					total: 0,
 					highest: 0,
 					lowest: 0,
@@ -112,24 +112,24 @@ client.on('messageCreate', message => {
 					last5Raids: ["None", "None", "None", "None", "None"]
 				}
 			};
-			raiderData.xp.highest = xpGained;
+			raiderData.score.highest = scoreGained;
 
 			// Logs confirmation for new raider addition
 			console.log(`${convertTimestampToIST(message.createdTimestamp)}: NEW raider(${raider}) from server(${message.guildId}) was added!`);
 		}
 
 		raiderData.raids.total += 1;
-		raiderData.xp.total += xpGained;
-		raiderData.xp.lastRaid = xpGained;
+		raiderData.score.total += scoreGained;
+		raiderData.score.lastRaid = scoreGained;
 
-		if (raiderData.xp.highest < xpGained)
-			raiderData.xp.highest = xpGained;
+		if (raiderData.score.highest < scoreGained)
+			raiderData.score.highest = scoreGained;
 
-		if (raiderData.xp.lowest > xpGained || raiderData.xp.lowest === 0)
-			raiderData.xp.lowest = xpGained;
+		if (raiderData.score.lowest > scoreGained || raiderData.score.lowest === 0)
+			raiderData.score.lowest = scoreGained;
 
-		raiderData.xp.last5Raids.push(`${xpGained}`);
-		raiderData.xp.last5Raids = raiderData.xp.last5Raids.slice(1);
+		raiderData.score.last5Raids.push(`${scoreGained}`);
+		raiderData.score.last5Raids = raiderData.score.last5Raids.slice(1);
 
 		// Update Firebase with the modified data
 		raidersRef.child(raider).set(raiderData, (error) => {

@@ -54,7 +54,7 @@ exports.run = (client, message, args) => {
                 .setTimestamp()
                 .addFields(
                     { name: '⚔️ Raids', value: `Total: \`${raiderData.raids.total}\`` },
-                    { name: '🎓 XP', value: `Total: \`${raiderData.xp.total}\`\nHighest: \`${raiderData.xp.highest}\`\nLowest: \`${raiderData.xp.lowest}\`\nLast Raid: \`${raiderData.xp.lastRaid}\`\nAverage: \`${Math.round(raiderData.xp.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.xp.last5Raids.join(', ')}\`` },
+                    { name: '🎓 Score', value: `Total: \`${raiderData.score.total}\`\nHighest: \`${raiderData.score.highest}\`\nLowest: \`${raiderData.score.lowest}\`\nLast Raid: \`${raiderData.score.lastRaid}\`\nAverage: \`${Math.round(raiderData.score.total / raiderData.raids.total)}\`\nLast 5 Raids: \`${raiderData.score.last5Raids.join(', ')}\`` },
                     { name: '<a:rocket_emoji:1141006841132879872> Join my support server to report issues or bugs or downtimes', value: `[Click here](https://discord.gg/SxwEffMWch)` }
                 )
                 
