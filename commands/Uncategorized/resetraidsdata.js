@@ -1,5 +1,6 @@
 const firebase = require('../../firebase.js');
 const fs = require('fs');
+const { AttachmentBuilder } = require('discord.js');
 
 exports.run = async (client, message, args) => {
     try {
@@ -20,13 +21,13 @@ exports.run = async (client, message, args) => {
         array.unshift(`Guild Stats`);
         const finalFileText = array.join(`\n\n===========================================\n\n`)
 
-        fs.writeFile(`storeroom/Guild_Stats.txt`, finalFileText, 'utf8', err => { })
-
-
+        fs.writeFile(`storeroom/Guild_Stats.txt`, finalFileText, 'utf8', err => { });
         snapshot.ref.remove();
 
+        const att = new AttachmentBuilder(path.join('storeroom', 'Guild_Stats.txt'), 'Guild_Stats.txt');
+
         console.log(`====================\nRAID DATA WAS RESET BY ${message.author.username}\n====================`);
-        message.reply('Raid data has been reset!').catch(console.error);
+        message.reply({ content: 'Raid data has been reset.', files: [att] }).catch(console.error);
     } catch (err) { console.error(err) }
 }
 
