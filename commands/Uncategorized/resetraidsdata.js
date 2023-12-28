@@ -27,7 +27,7 @@ exports.run = async (client, message, args) => {
 
         console.log(`====================\nRAID DATA WAS RESET BY ${message.author.username}\n====================`);
         message.reply('Raid data has been reset!').catch(console.error);
-    } catch { }
+    } catch (err) { console.error(err) }
 }
 
 exports.name = 'resetraidsdata'
