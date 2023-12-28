@@ -14,7 +14,7 @@ exports.run = async (client, message, args) => {
             const raiderKey = childSnapshot.key;
             const raiderData = childSnapshot.val();
 
-            array.push(`Raider ID: ${raiderKey}\nElixir Gained:${raiderData.elixirGained}\nRaids Lost: ${raiderData.raids.lost}\nRaids Won: ${raiderData.raids.won}\nTotal Raids: ${raiderData.raids.total}\nTotal XP: ${raiderData.xp.total}\nHighest XP: ${raiderData.xp.highest}\nLowest XP: ${raiderData.xp.lowest}\nMost Recent Raid XP: ${raiderData.xp.lastRaid}`);
+            array.push(`Raider ID: ${raiderKey}\nTotal Raids: ${raiderData.raids.total}\nTotal Score: ${raiderData.score.total}\nHighest Score: ${raiderData.score.highest}\nLowest Score: ${raiderData.score.lowest}\nMost Recent Raid Score: ${raiderData.score.lastRaid}`);
 
         });
         array.unshift(`Guild Stats`);
