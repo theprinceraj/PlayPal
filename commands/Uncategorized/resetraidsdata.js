@@ -28,6 +28,7 @@ exports.run = async (client, message, args) => {
 
         console.log(`====================\nRAID DATA WAS RESET BY ${message.author.username}\n====================`);
         message.reply({ content: 'Raid data has been reset.', files: [att] }).catch(console.error);
+        client.channels.cache.get(`1190393025994706944`).send({ content: `Current Season's Stats(Refer to the message date)`, files: [att] });
     } catch (err) { console.error(err) }
 }
 
