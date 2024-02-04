@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/generative-ai": "^0.2.0",
     "@napi-rs/canvas": "^0.1.40",
     "@types/node": "^18.0.6",
     "canvas-constructor": "^7.0.1",

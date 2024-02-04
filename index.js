@@ -46,6 +46,8 @@ for (const folder of commandsFolder) {
 	console.log(`${folder}`);
 	for (const file of commands) {
 		const commandName = file.split('.')[0];
+		const extension = file.split('.')[1];
+
 		const command = require(`./commands/${folder}/${file}`);
 		if (command.aliases) {
 			command.aliases.forEach(alias => {
@@ -53,6 +55,7 @@ for (const folder of commandsFolder) {
 			});
 		}
 		client.commands.set(commandName, command);
+		console.log(`Loaded ${commandName}`);
 	}
 }
 
