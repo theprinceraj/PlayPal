@@ -79,8 +79,93 @@ client.on("messageCreate", async (verifyMsg) => {
   ) {
     return;
   }
-  await verifyMsg.react("✅");
-  await verifyMsg.react("❌");
+  const dropRegex = /`Dropped\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const matchDrop = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(dropRegex)[1].replace(",", "")
+  );
+  const grabRegex = /`Claimed\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const matchGrab = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(grabRegex)[1].replace(",", "")
+  );
+  const dailiesRegex = /`Dailies\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const matchDailies = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(dailiesRegex)[1].replace(",", "")
+  );
+  const votesRegex = /`Votes\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const matchVotes = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(votesRegex)[1].replace(",", "")
+  );
+  const _3dRegex = /`3D\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const match3d = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(_3dRegex)[1].replace(",", "")
+  );
+  const bumpsRegex = /`Bumps\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
+  const matchBumps = parseInt(
+    verifyMsg.embeds[0].fields[1].value.match(bumpsRegex)[1]
+  );
+
+  const trustFactor = parseInt(
+    verifyMsg.embeds[0].thumbnail.url.split("/")[4].split(".")[0]
+  );
+
+  if (
+    !matchDrop ||
+    !matchGrab ||
+    !matchDailies ||
+    !matchVotes ||
+    !match3d ||
+    !matchBumps ||
+    !trustFactor
+  ) {
+    console.log(
+      "Drops: " +
+        matchDrop +
+        "\nGrabs: " +
+        matchGrab +
+        "\nDailies: " +
+        matchDailies +
+        "\nVotes: " +
+        matchVotes +
+        "\n3Ds: " +
+        match3d +
+        "\nBumps: " +
+        matchBumps +
+        "\nTrust Factor: " +
+        trustFactor
+    );
+    return;
+  }
+  const gloryA_Role = verifyMsg.guild.roles.cache.get("896663100340723762");
+  const verificationRole =
+    verifyMsg.guild.roles.cache.get("994659663826124910");
+  const mentionedUser = verifyMsg.mentions.members.first();
+  if (
+    matchDrop >= 1500 &&
+    matchGrab >= 1000 &&
+    matchDailies >= 50 &&
+    matchVotes >= 60 &&
+    match3d >= 3 &&
+    matchBumps >= 150 &&
+    trustFactor >= 40 &&
+    mentionedUser.roles.cache.has(gloryA_Role.id)
+  ) {
+    await verifyMsg.react("✅");
+    if (mentionedUser.roles.cache.has(verificationRole.id)) {
+      await verifyMsg.reply("You have already been verified! 😎");
+      return;
+    }
+    await mentionedUser.roles.add(verificationRole);
+    await verifyMsg.reply(
+      "Congratulations, you have been verified! You can now send messages in <#940238806316105758>, <#959829877522042981> and <#896428196873011210>. 🎉"
+    );
+  } else {
+    await verifyMsg.react("❌");
+    await verifyMsg.reply(
+      "Sorry, you are not eligible for verification yet. 😔\nPlease recheck if you fulfill the following requirements:\n```js\n1. Drops >= 1500, 2. Grabs >= 1000, 3. Dailies >= 50, 4. Votes >= 60\n5. 3D >= 3, 6. Bumps >= 150, 7. Trust Factor >= 40, 8. Has Chat Level 10 in server\n```\nYou can ask your queries in <#918693551133569065>."
+    );
+    if (mentionedUser.roles.cache.has(verificationRole.id))
+      await mentionedUser.roles.remove(verificationRole);
+  }
 });
 // Using firebase
 const firebase = require("./firebase.js");
