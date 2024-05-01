@@ -71,32 +71,6 @@ for (const folder of commandsFolder) {
   }
 }
 
-client.on("messageCreate", (tradeRequestMessage) => {
-  try {
-    if (
-      tradeRequestMessage.author.bot &&
-      tradeRequestMessage.embeds[0].description.includes(
-        "sent a trade request"
-      ) &&
-      tradeRequestMessage.channel.id === "950783355614539778"
-    ) {
-      tradeRequestMessage
-        .startThread({
-          name: `Send Crosstrade Proof:`,
-          autoArchiveDuration: 24 * 60,
-        })
-        .then((thread) => {
-          thread.send(
-            "Please attach a screenshot proof to the above crosstrade here. It is a compulsory rule."
-          );
-        })
-        .catch(
-          (error) => `Failed to create thread for ${tradeRequestMessage.url}`
-        );
-    }
-  } catch (error) {}
-});
-
 client.on("messageCreate", async (verifyMsg) => {
   if (
     verifyMsg.channel.id !== "994660136230588648" ||
