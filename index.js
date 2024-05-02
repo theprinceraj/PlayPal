@@ -73,7 +73,7 @@ for (const folder of commandsFolder) {
 
 client.on("messageCreate", async (verifyMsg) => {
   if (
-    verifyMsg.channel.id !== "943962871887462420" ||
+    verifyMsg.channel.id !== "994660136230588648" ||
     !verifyMsg.author.bot ||
     verifyMsg.author.id !== "853629533855809596"
   ) {
