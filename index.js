@@ -73,12 +73,21 @@ for (const folder of commandsFolder) {
 
 client.on("messageCreate", async (verifyMsg) => {
   if (
-    verifyMsg.channel.id !== "994660136230588648" ||
+    verifyMsg.channel.id !== "943962871887462420" ||
     !verifyMsg.author.bot ||
     verifyMsg.author.id !== "853629533855809596"
   ) {
     return;
   }
+  const mentionedUser = verifyMsg.mentions.members.first();
+  if (verifyMsg.embeds[0].author.url.split("/")[4] !== mentionedUser.id) {
+    verifyMsg.reply(
+      `<@${mentionedUser.id}>` +
+        ", please do not try to bypass verification by showing someone else's user info."
+    );
+    return;
+  }
+
   const dropRegex = /`Dropped\s+`\s•\s`(\d{1,3}(,\d{3})*)/;
   const matchDrop = parseInt(
     verifyMsg.embeds[0].fields[1].value.match(dropRegex)[1].replace(",", "")
@@ -138,7 +147,6 @@ client.on("messageCreate", async (verifyMsg) => {
   const gloryA_Role = verifyMsg.guild.roles.cache.get("896663100340723762");
   const verificationRole =
     verifyMsg.guild.roles.cache.get("994659663826124910");
-  const mentionedUser = verifyMsg.mentions.members.first();
   if (
     matchDrop >= 1500 &&
     matchGrab >= 1000 &&
@@ -151,17 +159,19 @@ client.on("messageCreate", async (verifyMsg) => {
   ) {
     await verifyMsg.react("✅");
     if (mentionedUser.roles.cache.has(verificationRole.id)) {
-      await verifyMsg.reply("You have already been verified! 😎");
+      await verifyMsg.reply(
+        `<@${mentionedUser.id}>, you have already been verified! 😎`
+      );
       return;
     }
     await mentionedUser.roles.add(verificationRole);
     await verifyMsg.reply(
-      "Congratulations, you have been verified! You can now send messages in <#940238806316105758>, <#959829877522042981> and <#896428196873011210>. 🎉"
+      `Congratulations <@${mentionedUser.id}>, you have been verified! You can now send messages in <#940238806316105758>, <#959829877522042981> and <#896428196873011210>. 🎉`
     );
   } else {
     await verifyMsg.react("❌");
     await verifyMsg.reply(
-      "Sorry, you are not eligible for verification yet. 😔\nPlease recheck if you fulfill the following requirements:\n```js\n1. Drops >= 1500, 2. Grabs >= 1000, 3. Dailies >= 50, 4. Votes >= 60\n5. 3D >= 3, 6. Bumps >= 150, 7. Trust Factor >= 40, 8. Has Chat Level 10 in server\n```\nYou can ask your queries in <#918693551133569065>."
+      `Sorry <@${mentionedUser.id}>, you are not eligible for verification yet. 😔\nPlease recheck if you fulfill the following requirements:\n\`\`\`js\n1. Drops >= 1500, 2. Grabs >= 1000, 3. Dailies >= 50, 4. Votes >= 60\n5. 3D >= 3, 6. Bumps >= 150, 7. Trust Factor >= 40, 8. Has Chat Level 10 in server\n\`\`\`\nYou can ask your queries in <#918693551133569065>.`
     );
     if (mentionedUser.roles.cache.has(verificationRole.id))
       await mentionedUser.roles.remove(verificationRole);
