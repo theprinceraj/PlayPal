@@ -126,59 +126,68 @@ client.on("messageCreate", async (verifyMsg) => {
     !matchBumps ||
     !trustFactor
   ) {
-    verifyMsg.reply(
-      "An error occured. Please ask the support team for manual verification."
-    );
-    console.log(
-      "Drops: " +
-        matchDrop +
-        "\nGrabs: " +
-        matchGrab +
-        "\nDailies: " +
-        matchDailies +
-        "\nVotes: " +
-        matchVotes +
-        "\n3Ds: " +
-        match3d +
-        "\nBumps: " +
-        matchBumps +
-        "\nTrust Factor: " +
-        trustFactor
-    );
-    return;
-  } else {
-    const gloryA_Role = verifyMsg.guild.roles.cache.get("896663100340723762");
-    const verificationRole =
-      verifyMsg.guild.roles.cache.get("994659663826124910");
     if (
-      matchDrop >= 1500 &&
-      matchGrab >= 1000 &&
-      matchDailies >= 50 &&
-      matchVotes >= 60 &&
-      match3d >= 3 &&
-      matchBumps >= 150 &&
-      trustFactor >= 40 &&
-      mentionedUser.roles.cache.has(gloryA_Role.id)
+      matchDrop !== 0 &&
+      matchGrab !== 0 &&
+      matchDailies !== 0 &&
+      matchVotes !== 0 &&
+      match3d !== 0 &&
+      matchBumps !== 0 &&
+      trustFactor !== 0
     ) {
-      await verifyMsg.react("✅");
-      if (mentionedUser.roles.cache.has(verificationRole.id)) {
-        await verifyMsg.reply(
-          `<@${mentionedUser.id}>, you have already been verified! 😎`
-        );
-        return;
-      }
-      await mentionedUser.roles.add(verificationRole);
-      await verifyMsg.reply(
-        `Congratulations <@${mentionedUser.id}>, you have been verified! You can now send messages in <#940238806316105758>, <#959829877522042981> and <#896428196873011210>. 🎉`
+      verifyMsg.reply(
+        "An error occured. Please ask the support team for manual verification."
       );
-    } else {
-      await verifyMsg.react("❌");
-      await verifyMsg.reply(
-        `Sorry <@${mentionedUser.id}>, you are not eligible for verification yet. 😔\nPlease recheck if you fulfill the following requirements:\n\`\`\`js\n1. Drops >= 1500, 2. Grabs >= 1000, 3. Dailies >= 50, 4. Votes >= 60\n5. 3D >= 3, 6. Bumps >= 150, 7. Trust Factor >= 40, 8. Has Chat Level 10 in server\n\`\`\`\nYou can ask your queries in <#918693551133569065>.`
+      console.log(
+        "Drops: " +
+          matchDrop +
+          "\nGrabs: " +
+          matchGrab +
+          "\nDailies: " +
+          matchDailies +
+          "\nVotes: " +
+          matchVotes +
+          "\n3Ds: " +
+          match3d +
+          "\nBumps: " +
+          matchBumps +
+          "\nTrust Factor: " +
+          trustFactor
       );
-      if (mentionedUser.roles.cache.has(verificationRole.id))
-        await mentionedUser.roles.remove(verificationRole);
+      return;
     }
+  }
+  const gloryA_Role = verifyMsg.guild.roles.cache.get("896663100340723762");
+  const verificationRole =
+    verifyMsg.guild.roles.cache.get("994659663826124910");
+  if (
+    matchDrop >= 1500 &&
+    matchGrab >= 1000 &&
+    matchDailies >= 50 &&
+    matchVotes >= 60 &&
+    match3d >= 3 &&
+    matchBumps >= 150 &&
+    trustFactor >= 40 &&
+    mentionedUser.roles.cache.has(gloryA_Role.id)
+  ) {
+    await verifyMsg.react("✅");
+    if (mentionedUser.roles.cache.has(verificationRole.id)) {
+      await verifyMsg.reply(
+        `<@${mentionedUser.id}>, you have already been verified! 😎`
+      );
+      return;
+    }
+    await mentionedUser.roles.add(verificationRole);
+    await verifyMsg.reply(
+      `Congratulations <@${mentionedUser.id}>, you have been verified! You can now send messages in <#940238806316105758>, <#959829877522042981> and <#896428196873011210>. 🎉`
+    );
+  } else {
+    await verifyMsg.react("❌");
+    await verifyMsg.reply(
+      `Sorry <@${mentionedUser.id}>, you are not eligible for verification yet. 😔\nPlease recheck if you fulfill the following requirements:\n\`\`\`js\n1. Drops >= 1500, 2. Grabs >= 1000, 3. Dailies >= 50, 4. Votes >= 60\n5. 3D >= 3, 6. Bumps >= 150, 7. Trust Factor >= 40, 8. Has Chat Level 10 in server\n\`\`\`\nYou can ask your queries in <#918693551133569065>.`
+    );
+    if (mentionedUser.roles.cache.has(verificationRole.id))
+      await mentionedUser.roles.remove(verificationRole);
   }
 });
 // Using firebase
