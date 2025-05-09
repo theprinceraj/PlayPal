@@ -1,23 +1,22 @@
 {
-  "name": "nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@google/generative-ai": "^0.2.0",
-    "@napi-rs/canvas": "^0.1.40",
-    "@types/node": "^18.0.6",
-    "canvas-constructor": "^7.0.1",
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.0.3",
-    "firebase": "^11.7.1",
-    "node-fetch": "^3.3.1"
-  }
+    "name": "nodejs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@google/generative-ai": "^0.2.0",
+        "@napi-rs/canvas": "^0.1.40",
+        "@types/node": "^18.0.6",
+        "canvas-constructor": "^7.0.1",
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.0.3",
+        "firebase": "^11.7.1"
+    }
 }
