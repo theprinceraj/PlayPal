@@ -17,6 +17,9 @@
         "canvas-constructor": "^7.0.1",
         "discord.js": "^14.14.1",
         "dotenv": "^16.0.3",
-        "firebase": "^11.7.1"
+        "firebase": "^11.10.0"
+    },
+    "overrides": {
+        "@grpc/grpc-js": "^1.14.0"
     }
 }
